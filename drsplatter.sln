@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drsplatter", "drsplatter.csproj", "{34D458E4-ADBE-03FA-CD2B-9B2B5B7FF590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drsplatter.Editor", "drsplatter.Editor.csproj", "{09AABDD8-A306-CEC0-365F-5139DD4ACBFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34D458E4-ADBE-03FA-CD2B-9B2B5B7FF590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D458E4-ADBE-03FA-CD2B-9B2B5B7FF590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D458E4-ADBE-03FA-CD2B-9B2B5B7FF590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D458E4-ADBE-03FA-CD2B-9B2B5B7FF590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09AABDD8-A306-CEC0-365F-5139DD4ACBFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AABDD8-A306-CEC0-365F-5139DD4ACBFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09AABDD8-A306-CEC0-365F-5139DD4ACBFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AABDD8-A306-CEC0-365F-5139DD4ACBFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
