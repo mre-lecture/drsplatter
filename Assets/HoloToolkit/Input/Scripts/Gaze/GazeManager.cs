@@ -91,6 +91,8 @@ namespace HoloToolkit.Unity.InputModule
         /// Unity UI pointer event.  This will be null if the EventSystem is not defined in the scene.
         /// </summary>
         public PointerEventData UnityUIPointerEvent { get; private set; }
+        public Vector3 Normal { get; internal set; }
+        public Vector3 Position { get; internal set; }
 
         /// <summary>
         /// Cached results of racast results.
@@ -106,10 +108,7 @@ namespace HoloToolkit.Unity.InputModule
             {
                 RaycastLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
             }
-        }
 
-        private void Start()
-        {
             if (GazeTransform == null)
             {
                 if (Camera.main != null)
@@ -225,7 +224,7 @@ namespace HoloToolkit.Unity.InputModule
             // Graphics raycast
             raycastResultList.Clear();
             EventSystem.current.RaycastAll(UnityUIPointerEvent, raycastResultList);
-            RaycastResult uiRaycastResult = FindClosestRaycastHitInLayermasks(raycastResultList, RaycastLayerMasks);
+            RaycastResult uiRaycastResult = FindFirstRaycastInLayermasks(raycastResultList, RaycastLayerMasks);
             UnityUIPointerEvent.pointerCurrentRaycast = uiRaycastResult;
 
             // If we have a raycast result, check if we need to overwrite the 3D raycast info
@@ -287,12 +286,12 @@ namespace HoloToolkit.Unity.InputModule
         #region Helpers
 
         /// <summary>
-        /// Find the closest raycast hit in the list of RaycastResults that is also included in the LayerMask list.  
+        /// Find the first (closest) raycast in the list of RaycastResults that is also included in the LayerMask list.  
         /// </summary>
         /// <param name="candidates">List of RaycastResults from a Unity UI raycast</param>
         /// <param name="layerMaskList">List of layers to support</param>
         /// <returns>RaycastResult if hit, or an empty RaycastResult if nothing was hit</returns>
-        private RaycastResult FindClosestRaycastHitInLayermasks(List<RaycastResult> candidates, LayerMask[] layerMaskList)
+        private RaycastResult FindFirstRaycastInLayermasks(List<RaycastResult> candidates, LayerMask[] layerMaskList)
         {
             int combinedLayerMask = 0;
             for (int i = 0; i < layerMaskList.Length; i++)
@@ -300,22 +299,19 @@ namespace HoloToolkit.Unity.InputModule
                 combinedLayerMask = combinedLayerMask | layerMaskList[i].value;
             }
 
-            RaycastResult? minHit = null;
             for (var i = 0; i < candidates.Count; ++i)
             {
                 if (candidates[i].gameObject == null || !IsLayerInLayerMask(candidates[i].gameObject.layer, combinedLayerMask))
                 {
                     continue;
                 }
-                if (minHit == null || candidates[i].distance < minHit.Value.distance)
-                {
-                    minHit = candidates[i];
-                }
+
+                return candidates[i];
             }
 
-             return minHit ?? new RaycastResult();
+            return new RaycastResult();
         }
-        
+
         /// <summary>
         /// Look through the layerMaskList and find the index in that list for which the supplied layer is part of
         /// </summary>

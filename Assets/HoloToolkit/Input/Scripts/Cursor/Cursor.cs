@@ -180,14 +180,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Override for enable functions
         /// </summary>
-        protected virtual void OnEnable()
-        {
-            if (gazeManager)
-            {
-                OnFocusedObjectChanged(null, gazeManager.HitObject);
-            }
-            OnCursorStateChange(CursorStateEnum.None);
-        }
+        protected virtual void OnEnable() { }
 
         /// <summary>
         /// Override for disable functions
@@ -197,8 +190,6 @@ namespace HoloToolkit.Unity.InputModule
             TargetedObject = null;
             TargetedCursorModifier = null;
             visibleHandsCount = 0;
-            IsHandVisible = false;
-            OnCursorStateChange(CursorStateEnum.Contextual);
         }
 
         private void OnDestroy()
@@ -294,7 +285,6 @@ namespace HoloToolkit.Unity.InputModule
             if (TargetedObject == null)
             {
                 this.TargetedObject = null;
-                this.TargetedCursorModifier = null;
                 targetPosition = gazeManager.GazeOrigin + gazeManager.GazeNormal * DefaultCursorDistance;
                 targetRotation = lookForward.magnitude > 0 ? Quaternion.LookRotation(lookForward, Vector3.up) : transform.rotation;
             }

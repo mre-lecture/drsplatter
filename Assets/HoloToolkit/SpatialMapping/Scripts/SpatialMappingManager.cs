@@ -212,7 +212,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             if (!IsObserverRunning())
             {
                 surfaceObserver.StartObserving();
-                StartTime = Time.unscaledTime;
+                StartTime = Time.time;
             }
         }
 

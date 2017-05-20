@@ -22,7 +22,7 @@ namespace HoloToolkit.Sharing
         /// Default username to use when joining a session.
         /// </summary>
         /// <remarks>User code should set the user name by setting the UserName property.</remarks>
-        private const string DefaultUserName = "User ";
+        private const string DefaultUserName = "User0";
 
         /// <summary>
         /// Set whether this app should be a Primary or Secondary client.
@@ -108,14 +108,7 @@ namespace HoloToolkit.Sharing
         /// </summary> 
         private DiscoveryClientAdapter discoveryClientAdapter;
 
-        /// <summary>
-        /// The current ping interval during AutoDiscovery updates.
-        /// </summary>
         private float pingIntervalCurrent;
-
-        /// <summary>
-        /// True when AutoDiscovery is actively searching, otherwise false.
-        /// </summary>
         private bool isTryingToFindServer;
 
         [Tooltip("Show Detailed Information for server connections")]
@@ -135,7 +128,7 @@ namespace HoloToolkit.Sharing
             }
             set
             {
-                using (var userName = new XString(value))
+                using (XString userName = new XString(value))
                 {
                     Manager.SetUserName(userName);
                 }
@@ -150,27 +143,11 @@ namespace HoloToolkit.Sharing
         {
             get
             {
-                if (networkConnection == null && Manager != null)
+                if (networkConnection == null)
                 {
                     networkConnection = Manager.GetServerConnection();
                 }
                 return networkConnection;
-            }
-        }
-
-        /// <summary>
-        /// Returns true if connected to a Sharing Service server.
-        /// </summary>
-        public bool IsConnected
-        {
-            get
-            {
-                if (Manager != null && Connection != null)
-                {
-                    return Connection.IsConnected();
-                }
-
-                return false;
             }
         }
 
@@ -194,6 +171,8 @@ namespace HoloToolkit.Sharing
 
         protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             if (discoveryClient != null)
             {
                 discoveryClient.RemoveListener(discoveryClientAdapter);
@@ -248,8 +227,6 @@ namespace HoloToolkit.Sharing
 
             // Forces a garbage collection to try to clean up any additional reference to SWIG-wrapped objects
             GC.Collect();
-
-            base.OnDestroy();
         }
 
         private void LateUpdate()
@@ -268,7 +245,7 @@ namespace HoloToolkit.Sharing
 
         private void Connect()
         {
-            var config = new ClientConfig(ClientRole);
+            ClientConfig config = new ClientConfig(ClientRole);
             config.SetIsAudioEndpoint(IsAudioEndpoint);
             config.SetLogWriter(logWriter);
 
@@ -295,21 +272,9 @@ namespace HoloToolkit.Sharing
             SessionsTracker = new ServerSessionsTracker(Manager.GetSessionManager());
             SessionUsersTracker = new SessionUsersTracker(SessionsTracker);
 
-            using (var userName = new XString(DefaultUserName))
+            using (XString userName = new XString(DefaultUserName))
             {
-#if UNITY_WSA && !UNITY_EDITOR
-                Manager.SetUserName(SystemInfo.deviceName);
-#else
-                if (!string.IsNullOrEmpty(Environment.UserName))
-                {
-                    Manager.SetUserName(Environment.UserName);
-                }
-                else
-                {
-                    User localUser = Manager.GetLocalUser();
-                    Manager.SetUserName(userName + localUser.GetID().ToString());
-                }
-#endif
+                Manager.SetUserName(userName);
             }
         }
 

@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -31,16 +31,12 @@ namespace HoloToolkit.Unity.InputModule
 
         [Tooltip("Scale by which hand movement in z is multipled to move the dragged object.")]
         public float DistanceScale = 2f;
-        
-        public enum RotationModeEnum
-        {
-            Default,
-            LockObjectRotation,
-            OrientTowardUser,
-            OrientTowardUserAndKeepUpright
-        }
 
-        public RotationModeEnum RotationMode = RotationModeEnum.Default;
+        [Tooltip("Should the object be kept upright as it is being dragged?")]
+        public bool IsKeepUpright = false;
+
+        [Tooltip("Should the object be oriented towards the user as it is being dragged?")]
+        public bool IsOrientTowardsUser = true;
 
         public bool IsDraggingEnabled = true;
 
@@ -198,15 +194,11 @@ namespace HoloToolkit.Unity.InputModule
 
             draggingPosition = pivotPosition + (targetDirection * targetDistance);
 
-            if (RotationMode == RotationModeEnum.OrientTowardUser || RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright) 
+            if (IsOrientTowardsUser)
             {
                 draggingRotation = Quaternion.LookRotation(HostTransform.position - pivotPosition);
             }
-            else if (RotationMode == RotationModeEnum.LockObjectRotation)
-            {
-                draggingRotation = HostTransform.rotation;
-            }
-            else // RotationModeEnum.Default
+            else
             {
                 Vector3 objForward = mainCamera.transform.TransformDirection(objRefForward); // in world space
                 Vector3 objUp = mainCamera.transform.TransformDirection(objRefUp);   // in world space
@@ -215,12 +207,12 @@ namespace HoloToolkit.Unity.InputModule
 
             // Apply Final Position
             HostTransform.position = draggingPosition + mainCamera.transform.TransformDirection(objRefGrabPoint);
-            // Apply Final Rotation
             HostTransform.rotation = draggingRotation;
-            if (RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)		
-            {		
-                Quaternion upRotation = Quaternion.FromToRotation(HostTransform.up, Vector3.up);		
-                HostTransform.rotation = upRotation * HostTransform.rotation;		
+
+            if (IsKeepUpright)
+            {
+                Quaternion upRotation = Quaternion.FromToRotation(HostTransform.up, Vector3.up);
+                HostTransform.rotation = upRotation * HostTransform.rotation;
             }
         }
 
