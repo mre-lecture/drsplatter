@@ -349,6 +349,7 @@
     <Compile Include="Assets\HoloToolkit\Utilities\Tests\Scripts\PlaneTargetGroupPicker.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Tests\Scripts\TextToSpeechManagerTest.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Tests\Scripts\TextToSpeechOnTap.cs" />
+    <Compile Include="Assets\Scripts\BloodBar.cs" />
     <Compile Include="Assets\Scripts\BodyCollider_GestureHandler.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
   </ItemGroup>
