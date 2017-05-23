@@ -5,19 +5,30 @@ using UnityEngine;
 
 public class BodyCollider_GestureHandler : MonoBehaviour, IInputClickHandler, IInputHandler
 {
-
-    private bool isActive = false;
     private bool isRed = false;
+    public BloodBarScript bbs;
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
+        Invoke("ChangeColor", 0f);
+        Invoke("ChangeColor", 3f);
+    }
+
+    public void OnInputDown(InputEventData eventData)
+    { }
+    public void OnInputUp(InputEventData eventData)
+    { }
+
+    private void ChangeColor()
+    {
         if (!isRed)
         {
             Renderer rend = this.GetComponent<Renderer>();
             rend.material.shader = Shader.Find("Specular");
             rend.material.SetColor("_SpecColor", Color.red);
             isRed = !isRed;
+            bbs.TakeDamage(20);
         }
         else
         {
@@ -26,15 +37,10 @@ public class BodyCollider_GestureHandler : MonoBehaviour, IInputClickHandler, II
             rend.material.SetColor("_SpecColor", Color.white);
             isRed = !isRed;
         }
-}
-
-    public void OnInputDown(InputEventData eventData)
-    { }
-    public void OnInputUp(InputEventData eventData)
-    { }
+    }
 
     void Update()
-        {
+    {
 
-        }
+    }
 }
