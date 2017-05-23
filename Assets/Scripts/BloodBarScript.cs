@@ -10,14 +10,23 @@ public class BloodBarScript : MonoBehaviour {
 
     private float bloodLevel = 0;
     private float maxBloodLevel = 150;
+    private float bloodLossRate = 1;
 
 	// Use this for initialization
 	void Start () {
         bloodLevel = maxBloodLevel;
 	}
 
-	// Update is called once per frame
-	void Update () {
+    public void Reset()
+    {
+        StopBloodLoss();
+        bloodLevel = maxBloodLevel;
+        bloodLossRate = 1;
+        UpdateBloodBar();
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -29,7 +38,27 @@ public class BloodBarScript : MonoBehaviour {
         ratioText.text = (ratio * 100).ToString("0") + '%';
     }
 
-    private void TakeDamage(float damage)
+    public void SetBloodLossRate(float bloodLossRate)
+    {
+        this.bloodLossRate = bloodLossRate;
+    }
+
+    public void StartBloodLoss()
+    {
+        InvokeRepeating("TakeBloodLoss", 2f, 1f);
+    }
+
+    public void StopBloodLoss()
+    {
+        CancelInvoke("TakeBloodLoss");
+    }
+
+    private void TakeBloodLoss()
+    {
+        TakeDamage(1);
+    }
+
+    public void TakeDamage(float damage)
     {
         bloodLevel -= damage;
         if(bloodLevel < 0)
@@ -39,7 +68,7 @@ public class BloodBarScript : MonoBehaviour {
         UpdateBloodBar();
     }
 
-    private void HealBloodLoss(float heal)
+    public void healBloodLoss(float heal)
     {
         bloodLevel += heal;
         if (bloodLevel > maxBloodLevel)
