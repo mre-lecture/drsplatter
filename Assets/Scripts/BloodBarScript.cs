@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BloodBar : MonoBehaviour {
+public class BloodBarScript : MonoBehaviour {
 
-    public Image currentBloodBar;
+    public Image BloodBar;
     public Text ratioText;
 
-    private float bloodLevel = 150;
+    private float bloodLevel = 0;
     private float maxBloodLevel = 150;
 
 	// Use this for initialization
 	void Start () {
-		
+        bloodLevel = maxBloodLevel;
 	}
 
 	// Update is called once per frame
@@ -24,7 +24,8 @@ public class BloodBar : MonoBehaviour {
     private void UpdateBloodBar()
     {
         float ratio = bloodLevel / maxBloodLevel;
-        currentBloodBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
+        // currentBloodBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
+        BloodBar.fillAmount = ratio;
         ratioText.text = (ratio * 100).ToString("0") + '%';
     }
 
