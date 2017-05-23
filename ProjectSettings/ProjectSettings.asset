@@ -526,7 +526,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 000ff2725cf0d301
+  metroCertificateNotAfter: 809b12479ff2d301
   metroApplicationDescription: Dr. Splatter
   wsaImages: {}
   metroTileShortName: 

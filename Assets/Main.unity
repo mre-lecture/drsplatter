@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 496783975}
   - component: {fileID: 496783974}
   m_Layer: 5
-  m_Name: Text
+  m_Name: BloodRatio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1492,6 +1492,7 @@ GameObject:
   - component: {fileID: 1044027624}
   - component: {fileID: 1044027626}
   - component: {fileID: 1044027625}
+  - component: {fileID: 1044027627}
   m_Layer: 5
   m_Name: Bloodbar
   m_TagString: Untagged
@@ -1551,6 +1552,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1044027623}
+--- !u!114 &1044027627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1044027623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21282dd6734b1e4d80da02b1a5a4de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BloodBar: {fileID: 1044027625}
+  ratioText: {fileID: 496783974}
 --- !u!1001 &1159640903
 Prefab:
   m_ObjectHideFlags: 0
@@ -2538,5 +2552,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SavedAnchorFriendlyName: SavedAnchorFriendlyName
   PlaceParentOnTap: 0
-  ParentGameObjectToPlace: {fileID: 0}
+  ParentGameObjectToPlace: {fileID: 823272439}
   IsBeingPlaced: 0
