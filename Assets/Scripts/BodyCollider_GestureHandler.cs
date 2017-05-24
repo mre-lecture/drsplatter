@@ -11,8 +11,9 @@ public class BodyCollider_GestureHandler : MonoBehaviour, IInputClickHandler, II
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
+        bbs.TakeDamage(20);
         Invoke("ChangeColor", 0f);
-        Invoke("ChangeColor", 3f);
+
     }
 
     public void OnInputDown(InputEventData eventData)

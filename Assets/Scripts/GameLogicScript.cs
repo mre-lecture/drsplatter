@@ -8,11 +8,14 @@ public class GameLogicScript : MonoBehaviour {
     public BloodBarScript bloodBarScript;
 
     public GameObject startButton;
+    public GameObject gameStage;
 
 	// Use this for initialization
 	void Start () {
         gameStarted = false;
-	}
+
+        gameStage.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
+    }
 	
 	// Update is called once per frame
 	void Update () {

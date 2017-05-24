@@ -55,7 +55,7 @@ public class BloodBarScript : MonoBehaviour {
 
     private void TakeBloodLoss()
     {
-        TakeDamage(1);
+        TakeDamage(bloodLossRate);
     }
 
     public void TakeDamage(float damage)
