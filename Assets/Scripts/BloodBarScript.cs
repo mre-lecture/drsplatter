@@ -8,21 +8,29 @@ public class BloodBarScript : MonoBehaviour {
     public Image BloodBar;
     public Text ratioText;
 
-    private float bloodLevel = 0;
-    private float maxBloodLevel = 150;
-    private float bloodLossRate = 1;
+    public static BloodBarScript instance;
+
+    public static float bloodLevel = 0;
+    public static float maxBloodLevel = 150;
+    public static float bloodLossRate = 1;
 
 	// Use this for initialization
 	void Start () {
         bloodLevel = maxBloodLevel;
 	}
 
-    public void Reset()
+    void Awake()
+    {
+        instance = this;
+    }
+
+    public static void Reset()
     {
         StopBloodLoss();
         bloodLevel = maxBloodLevel;
         bloodLossRate = 1;
-        UpdateBloodBar();
+        if(instance)
+            instance.UpdateBloodBar();
     }
 
     // Update is called once per frame
@@ -30,6 +38,7 @@ public class BloodBarScript : MonoBehaviour {
 		
 	}
 
+    // Update visual presentation in GameSpace and calculate ratio, to make visualization better
     private void UpdateBloodBar()
     {
         float ratio = bloodLevel / maxBloodLevel;
@@ -38,43 +47,53 @@ public class BloodBarScript : MonoBehaviour {
         ratioText.text = (ratio * 100).ToString("0") + '%';
     }
 
-    public void SetBloodLossRate(float bloodLossRate)
+    public static void SetBloodLossRate(float lossRate)
     {
-        this.bloodLossRate = bloodLossRate;
+        bloodLossRate = lossRate;
     }
 
-    public void StartBloodLoss()
+    public static void ModifyBloodLossRate(float modifier)
     {
-        InvokeRepeating("TakeBloodLoss", 2f, 1f);
+        bloodLossRate += modifier;
     }
 
-    public void StopBloodLoss()
+    public static void StartBloodLoss()
     {
-        CancelInvoke("TakeBloodLoss");
+        if (instance)
+            instance.InvokeRepeating("TakeBloodLoss", 2f, 1f);
     }
 
-    private void TakeBloodLoss()
+    public static void StopBloodLoss()
     {
-        TakeDamage(bloodLossRate);
+        if(instance)
+        instance.CancelInvoke("TakeBloodLoss");
     }
 
-    public void TakeDamage(float damage)
+    private static void TakeBloodLoss()
+    {
+        if(instance)
+        instance.TakeDamage(bloodLossRate);
+    }
+
+    public static void TakeDamage(float damage)
     {
         bloodLevel -= damage;
         if(bloodLevel < 0)
         {
             bloodLevel = 0;
         }
-        UpdateBloodBar();
+        if(instance)
+            instance.UpdateBloodBar();
     }
 
-    public void healBloodLoss(float heal)
+    public static void healBloodLoss(float heal)
     {
         bloodLevel += heal;
         if (bloodLevel > maxBloodLevel)
         {
             bloodLevel = maxBloodLevel;
         }
-        UpdateBloodBar();
+        if(instance)
+            instance.UpdateBloodBar();
     }
 }

@@ -6,13 +6,18 @@ using UnityEngine;
 public class BodyCollider_GestureHandler : MonoBehaviour, IInputClickHandler, IInputHandler
 {
     private bool isRed = false;
-    public BloodBarScript bbs;
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
-        bbs.TakeDamage(20);
-        Invoke("ChangeColor", 0f);
+        if (GameLogicScript.selectedTool.Equals(" "))
+        {
+            BloodBarScript.TakeDamage(5);
+        }else if (GameLogicScript.selectedTool.Equals("scalpel"))
+        {
+
+        }
+        
 
     }
 
@@ -29,7 +34,7 @@ public class BodyCollider_GestureHandler : MonoBehaviour, IInputClickHandler, II
             rend.material.shader = Shader.Find("Specular");
             rend.material.SetColor("_SpecColor", Color.red);
             isRed = !isRed;
-            bbs.TakeDamage(20);
+            BloodBarScript.TakeDamage(20);
         }
         else
         {
