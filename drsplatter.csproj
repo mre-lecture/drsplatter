@@ -354,6 +354,8 @@
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\GameLogicScript.cs" />
     <Compile Include="Assets\Scripts\StartButton_GestureHandler.cs" />
+    <Compile Include="Assets\Scripts\TapToPickUp.cs" />
+    <Compile Include="Assets\Scripts\TapToPutDown.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Blood decal pack\readme.txt" />

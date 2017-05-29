@@ -72,7 +72,7 @@ public class BloodBarScript : MonoBehaviour {
     private static void TakeBloodLoss()
     {
         if(instance)
-        instance.TakeDamage(bloodLossRate);
+        TakeDamage(bloodLossRate);
     }
 
     public static void TakeDamage(float damage)
