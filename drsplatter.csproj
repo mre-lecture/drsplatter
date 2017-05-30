@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WSAPlayer:21</UnityBuildTarget>
     <UnityVersion>5.6.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -353,9 +355,11 @@
     <Compile Include="Assets\Scripts\BodyCollider_GestureHandler.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\GameLogicScript.cs" />
+    <Compile Include="Assets\Scripts\InformationHelper.cs" />
     <Compile Include="Assets\Scripts\StartButton_GestureHandler.cs" />
     <Compile Include="Assets\Scripts\TapToPickUp.cs" />
     <Compile Include="Assets\Scripts\TapToPutDown.cs" />
+    <Compile Include="Assets\Scripts\WoundGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Blood decal pack\readme.txt" />
@@ -391,6 +395,17 @@
     <None Include="Assets\HoloToolkit\Utilities\Shaders\WindowOcclusion.shader" />
     <None Include="Assets\HoloToolkit\Utilities\Shaders\macro.cginc" />
     <None Include="Assets\info_morgueroom.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nunit.framework.dll" />
+    <Content Include="UnityEditor.dll" />
+    <Content Include="UnityEngine.Analytics.dll" />
+    <Content Include="UnityEngine.dll" />
+    <Content Include="UnityEngine.HoloLens.dll" />
+    <Content Include="UnityEngine.Networking.dll" />
+    <Content Include="UnityEngine.TestRunner.dll" />
+    <Content Include="UnityEngine.UI.dll" />
+    <Content Include="UnityEngine.VR.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

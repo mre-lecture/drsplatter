@@ -14,19 +14,23 @@ public class BloodBarScript : MonoBehaviour {
     public static float maxBloodLevel = 150;
     public static float bloodLossRate = 1;
 
+    //void Awake()
+    //{
+    //    bloodLevel = 0;
+    //    maxBloodLevel = 150;
+    //    bloodLossRate = 1;
+    //}
+
+
 	// Use this for initialization
 	void Start () {
         bloodLevel = maxBloodLevel;
 	}
 
-    void Awake()
-    {
-        instance = this;
-    }
-
     public static void Reset()
     {
         StopBloodLoss();
+        maxBloodLevel = 150;
         bloodLevel = maxBloodLevel;
         bloodLossRate = 1;
         if(instance)

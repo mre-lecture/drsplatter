@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLogicScript : MonoBehaviour {
 
@@ -11,8 +12,13 @@ public class GameLogicScript : MonoBehaviour {
 
     public static string selectedTool;
 
-	// Use this for initialization
-	void Start () {
+    //private void Awake()
+    //{
+    //    selectedTool = " ";
+    //}
+
+    // Use this for initialization
+    void Start () {
         gameStarted = false;
         selectedTool = " ";
 
@@ -27,16 +33,25 @@ public class GameLogicScript : MonoBehaviour {
 
     public void StartGame()
     {
-        gameStarted = true;
-        startButton.SetActive(false);
-        BloodBarScript.Reset();
-        BloodBarScript.StartBloodLoss();
+        if (gameStarted == false)
+        {
+            gameStarted = true;
+            startButton.SetActive(false);
+            BloodBarScript.Reset();
+            BloodBarScript.StartBloodLoss();
+        }
     }
 
     public void StopGame()
     {
         gameStarted = false;
-
         BloodBarScript.StopBloodLoss();
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene("Main");
+        selectedTool = " ";
+        BloodBarScript.Reset();
     }
 }
