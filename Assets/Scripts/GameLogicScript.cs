@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameLogicScript : MonoBehaviour {
 
@@ -9,6 +10,9 @@ public class GameLogicScript : MonoBehaviour {
 
     public GameObject startButton;
     public GameObject gameStage;
+    public Text timerText;
+
+    float timer = 0.0f;
 
     public static string selectedTool;
 
@@ -23,13 +27,20 @@ public class GameLogicScript : MonoBehaviour {
         selectedTool = " ";
 
         // Place Gamestage in Front of Playercamera - ! Currently NOT Working !
-        gameStage.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
+        gameStage.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 4;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (gameStarted)
+        {
+            timer += Time.deltaTime;
+            float minutes = (timer / 60);
+            float seconds = timer - minutes * 60;
+            timerText.text = seconds.ToString("0");
+        }
+        
+    }
 
     public void StartGame()
     {
