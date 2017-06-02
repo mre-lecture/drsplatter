@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HoloToolkit.Unity.InputModule;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,18 @@ public class InformationHelper : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void OnInputClicked(InputClickedEventData eventData)
+    {
+        gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    public void OnInputDown(InputEventData eventData)
+    { }
+    public void OnInputUp(InputEventData eventData)
+    { }
 
     public void ShowHelp()
     {
