@@ -7,10 +7,12 @@ public class LeftLegWoundScript : MonoBehaviour {
 
     private static int BodyPartBloodLoss;
     private static string woundType;
-    private bool bandaged;
+    private bool bandaged = false;
+    private bool desinfected = false;
+    private bool anesthetized = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -35,7 +37,7 @@ public class LeftLegWoundScript : MonoBehaviour {
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
-        if (GameLogicScript.selectedTool.Equals("bandage"))
+        if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
         {
             GameLogicScript.numberOfBandages--;
             bandaged = true;
@@ -44,16 +46,19 @@ public class LeftLegWoundScript : MonoBehaviour {
 
             BloodBarScript.ModifyBloodLossRate(-10);
             BodyPartBloodLoss -= 10;
+            DisplayFieldScript.Display("Bandages applied");
         }
-        else if (GameLogicScript.selectedTool.Equals("desinfectant"))
+        else if (GameLogicScript.selectedTool.Equals("desinfectant") && !desinfected)
         {
             GameLogicScript.numberOfDesinfectants--;
+            desinfected = true;
 
             // Change Model somehow? or not?
 
             BloodBarScript.ModifyBloodLossRate(-5);
             BodyPartBloodLoss -= 5;
-            BloodBarScript.TakeDamage(10);
+            BloodBarScript.TakeDamage(20);
+            DisplayFieldScript.Display("Desinfectant applied");
         }
         else if (GameLogicScript.selectedTool.Equals("scissors") && bandaged)
         {
@@ -62,17 +67,22 @@ public class LeftLegWoundScript : MonoBehaviour {
             BodyPartBloodLoss += 10;
 
             // Remove Bandage Model
-
+            DisplayFieldScript.Display("Bandages removed");
         }
-        else if (GameLogicScript.selectedTool.Equals("syringe"))
+        else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
         {
-            // meh ?
+            BloodBarScript.ModifyBloodLossRate(-2);
+            BodyPartBloodLoss -= 2;
+            BloodBarScript.TakeDamage(10);
+            anesthetized = true;
+            DisplayFieldScript.Display("Anesthetics applied");
         }
         else if (GameLogicScript.selectedTool.Equals("bonesaw"))
         {
-            BloodBarScript.TakeDamage(100);
-            // Remove Limb?
+            BloodBarScript.TakeDamage(50);
+            DisplayFieldScript.Display("Oh Really?");
         }
+
     }
 
     public void OnInputDown(InputEventData eventData)
