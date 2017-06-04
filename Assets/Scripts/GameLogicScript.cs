@@ -11,6 +11,8 @@ public class GameLogicScript : MonoBehaviour {
     public GameObject startButton;
     public GameObject gameStage;
     public Text timerText;
+    public static int numberOfBandages;
+    public static int numberOfDesinfectants;
 
     float timer = 0.0f;
 
@@ -39,6 +41,11 @@ public class GameLogicScript : MonoBehaviour {
             float seconds = timer - minutes * 60;
             timerText.text = seconds.ToString("0");
         }
+
+        if(BloodBarScript.bloodLossRate < 5)
+        {
+            StopGame();
+        }
         
     }
 
@@ -46,6 +53,8 @@ public class GameLogicScript : MonoBehaviour {
     {
         if (gameStarted == false)
         {
+            numberOfBandages = 10;
+            numberOfDesinfectants = 10;
             gameStarted = true;
             startButton.SetActive(false);
             BloodBarScript.Reset();
