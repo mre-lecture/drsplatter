@@ -30,6 +30,7 @@ public class GameLogicScript : MonoBehaviour {
 
         // Place Gamestage in Front of Playercamera - ! Currently NOT Working !
         gameStage.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 4;
+
     }
 	
 	// Update is called once per frame

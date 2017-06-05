@@ -64,8 +64,8 @@ MonoBehaviour:
     y: 0
     width: 556
     height: 1026
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -402,10 +402,10 @@ MonoBehaviour:
   m_LastProjectPath: D:\HS-Mannheim\IMB\Hauptstudium\7 IMB ( 9 )\MRE\drsplatter
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 728}
-    m_SelectedIDs: 8a2a0000
-    m_LastClickedID: 10890
-    m_ExpandedIDs: 000000002c280000562800008a2a0000ec2a0000bc2b0000022c0000582c0000c02c0000ca2c00003c2d0000742d0000862d0000b62d0000c6320000c8320000ca32000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 872}
+    m_SelectedIDs: 882a0000
+    m_LastClickedID: 10888
+    m_ExpandedIDs: 000000002a28000054280000882a0000ea2a0000a82b0000ba2b0000002c0000562c0000be2c0000c82c00003a2d0000722d0000842d0000b42d0000ce320000d0320000d232000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -433,7 +433,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002c28000056280000ec2a0000bc2b0000022c0000582c0000c02c0000ca2c00003c2d0000742d0000862d0000b62d0000c6320000c8320000ca320000
+    m_ExpandedIDs: 000000002a28000054280000882a0000ea2a0000ba2b0000002c0000562c0000be2c0000c82c00003a2d0000722d0000842d0000b42d0000ce320000d0320000d2320000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -549,9 +549,9 @@ MonoBehaviour:
     height: 719
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0ae0ffff
-    m_LastClickedID: -8182
-    m_ExpandedIDs: dafbffff000000004e2f0000782f0000
+    m_SelectedIDs: 02300000
+    m_LastClickedID: 12290
+    m_ExpandedIDs: e2faffffdafbffff00000000c02e0000502f0000582f0000682f00000a300000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -601,14 +601,14 @@ MonoBehaviour:
     width: 946
     height: 719
   m_SceneLighting: 1
-  lastFramingTime: 425.6405288106982
+  lastFramingTime: 3910.8090530156896
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.103952, y: -4.154798, z: 23.038153}
+    m_Target: {x: 0.025359184, y: 1.5210009, z: 2.4769998}
     speed: 2
-    m_Value: {x: 2.103952, y: -4.154798, z: 23.038153}
+    m_Value: {x: 0.025359184, y: 1.5210009, z: 2.4769998}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -631,13 +631,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.12852082, y: -0.048468217, z: 0.006289314, w: -0.99050176}
+    m_Target: {x: -0.28837964, y: 0.0034507588, z: -0.0010390918, w: -0.9575094}
     speed: 2
-    m_Value: {x: -0.12852082, y: -0.048468217, z: 0.006289314, w: -0.99050176}
+    m_Value: {x: -0.28837964, y: 0.0034507588, z: -0.0010390918, w: -0.9575094}
   m_Size:
-    m_Target: 23.933973
+    m_Target: 1.5231373
     speed: 2
-    m_Value: 23.933973
+    m_Value: 1.5231373
   m_Ortho:
     m_Target: 0
     speed: 2

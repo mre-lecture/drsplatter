@@ -8,6 +8,8 @@ public class BloodBarScript : MonoBehaviour {
     public Image BloodBar;
     public Text ratioText;
 
+    public GameObject bloodParent;
+
     public static BloodBarScript instance;
 
     public static float bloodLevel = 0;
@@ -30,7 +32,7 @@ public class BloodBarScript : MonoBehaviour {
     public static void Reset()
     {
         StopBloodLoss();
-        maxBloodLevel = 150;
+        maxBloodLevel = 1500;
         bloodLevel = maxBloodLevel;
         bloodLossRate = 1;
         if(instance)
@@ -39,7 +41,13 @@ public class BloodBarScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
+		if(bloodLevel < 1000)
+        {
+            bloodParent.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(2).gameObject.SetActive(true);
+        }
 	}
 
     // Update visual presentation in GameSpace and calculate ratio, to make visualization better
