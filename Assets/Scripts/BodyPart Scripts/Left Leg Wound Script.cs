@@ -10,6 +10,7 @@ public class LeftLegWoundScript : MonoBehaviour {
     private bool bandaged = false;
     private bool desinfected = false;
     private bool anesthetized = false;
+    private bool stitched = false;
 
     // Use this for initialization
     void Start () {
@@ -81,6 +82,16 @@ public class LeftLegWoundScript : MonoBehaviour {
         {
             BloodBarScript.TakeDamage(50);
             DisplayFieldScript.Display("Oh Really?");
+        }
+        else if (GameLogicScript.selectedTool.Equals("needle") && !stitched)
+        {
+            BloodBarScript.TakeDamage(5);
+            BloodBarScript.ModifyBloodLossRate(-20);
+            BodyPartBloodLoss -= 20;
+            stitched = true;
+            DisplayFieldScript.Display("Wound stitched");
+
+            // Change Model accordingly
         }
 
     }
