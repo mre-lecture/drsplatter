@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 130
+  controlID: 40
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 79
+  controlID: 41
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 13
+  controlID: 42
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -262,7 +262,7 @@ MonoBehaviour:
   - {fileID: 19}
   - {fileID: 14}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -393,19 +393,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/BodyPart Scripts
+    - Assets/STB/ADAOPS/Paintable/MeshDecals/Materials/[Fade] Blood
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/BodyPart Scripts
+  - Assets/STB/ADAOPS/Paintable/MeshDecals/Materials/[Fade] Blood
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\HS-Mannheim\IMB\Hauptstudium\7 IMB ( 9 )\MRE\drsplatter
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 188}
-    m_SelectedIDs: 3a2d0000
-    m_LastClickedID: 11578
-    m_ExpandedIDs: 000000003628000060280000982a0000fa2a0000b82b0000ca2b0000122c0000682c0000d02c0000da2c00004c2d0000962d0000c62d0000e6320000e8320000ea320000a034000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 388}
+    m_SelectedIDs: f23c0000
+    m_LastClickedID: 15602
+    m_ExpandedIDs: 000000002a28000056280000bc2a0000262b0000f22b0000522c0000ae2c0000182d0000222d0000982d0000e62d00001c2e0000523300005433000056330000ac3c0000b23c0000d23c0000fa3c0000023d00000a3d0000363d0000503d0000543d0000783d0000903d0000b43d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -433,7 +433,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003628000060280000982a0000fa2a0000b82b0000ca2b0000122c0000682c0000d02c0000da2c00004c2d0000842d0000962d0000c62d0000e6320000e8320000ea320000
+    m_ExpandedIDs: 000000002a28000056280000bc2a0000262b0000f22b0000042c0000522c0000ae2c0000182d0000222d0000982d0000e62d0000f22d00001c2e0000523300005433000056330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000ec3700000e3c00001c32000082320000c6310000d6320000a233000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -549,9 +549,9 @@ MonoBehaviour:
     height: 719
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4c080000
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 6cccffffe4f1ffff60fbffff000000006c2f00009a2f00006a300000
+    m_ExpandedIDs: 72a1ffff16d8ffff1ed8ffff26d8ffff36d8ffff90d8ffff98d8ffffa0d8ffffaed8ffffdafbffff00000000b4ef0000ccef000024f000002ef1000014f2000032f2000052f20000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -606,9 +606,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.612217, y: 0.21114302, z: 2.3789506}
+    m_Target: {x: -0.30809915, y: -1.7772374, z: 5.3373075}
     speed: 2
-    m_Value: {x: 1.612217, y: 0.21114302, z: 2.3789506}
+    m_Value: {x: -0.30809915, y: -1.7772374, z: 5.3373075}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -631,13 +631,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.36264792, y: -0.2676492, z: 0.10956141, w: -0.8859157}
+    m_Target: {x: -0.34501475, y: 0.037157975, z: -0.013671303, w: -0.9377618}
     speed: 2
-    m_Value: {x: -0.36264795, y: -0.26764923, z: 0.10956142, w: -0.88591576}
+    m_Value: {x: -0.34501478, y: 0.03715798, z: -0.013671304, w: -0.93776184}
   m_Size:
-    m_Target: 1.3302195
+    m_Target: 5.186835
     speed: 2
-    m_Value: 1.3302195
+    m_Value: 5.186835
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -670,9 +670,9 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 458
+    x: 416
     y: 92
-    width: 1039
+    width: 946
     height: 719
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
@@ -682,8 +682,8 @@ MonoBehaviour:
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
-    m_HBaseRangeMin: -519.5
-    m_HBaseRangeMax: 519.5
+    m_HBaseRangeMin: -473
+    m_HBaseRangeMax: 473
     m_VBaseRangeMin: -351
     m_VBaseRangeMax: 351
     m_HAllowExceedBaseRangeMin: 1
@@ -702,25 +702,25 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
-      width: 1039
+      width: 946
       height: 702
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 519.5, y: 351}
+    m_Translation: {x: 473, y: 351}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -519.5
+      x: -473
       y: -351
-      width: 1039
+      width: 946
       height: 702
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 1039, y: 719}
+  m_LastWindowPixelSize: {x: 946, y: 719}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100

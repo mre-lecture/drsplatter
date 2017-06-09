@@ -160,6 +160,22 @@
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\Editor\LayerMaskExtensions.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\Editor\ProjectSettingsWindow.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\Editor\SceneSettingsWindow.cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\CreateDecalWindow.cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Basics].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Mesh Decals].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [OtherElements].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Prefabs].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Projected Decals].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\GenericMeshDecalEditor.cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\MaterialDefinition.cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\MergeDecalWindow.cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Basics].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Edition].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Extra].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Mesh Decals].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Prefabs].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Projected Decals].cs" />
+    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Basic Metal Texture Pack\readme.txt" />
@@ -195,6 +211,16 @@
     <None Include="Assets\HoloToolkit\Utilities\Shaders\macro.cginc" />
     <None Include="Assets\Resources\Blood decal pack\readme.txt" />
     <None Include="Assets\Resources\BloodSFX\ReadMe.txt" />
+    <None Include="Assets\STB\ADAOPS\Basics\Fonts\Font_4\Font_4.fnt" />
+    <None Include="Assets\STB\ADAOPS\Basics\Shaders\ProjectorFinal.shader" />
+    <None Include="Assets\STB\ADAOPS\Basics\Shaders\ProjectorOwn.shader" />
+    <None Include="Assets\STB\ADAOPS\Basics\Shaders\ProjectorTest.shader" />
+    <None Include="Assets\STB\ADAOPS\Basics\Shaders\TransparentShadowReceiver.shader" />
+    <None Include="Assets\STB\ADAOPS\Config\ADAOPS_Config_0004.txt" />
+    <None Include="Assets\STB\ADAOPS\_Documentation\_README (IMPORTANT!!!!).txt" />
+    <None Include="Assets\STB\ADAOPS\_Documentation\_TUTORIALS.txt" />
+    <None Include="Assets\STB\ADAOPS\_Documentation\_VERSION_CHANGES.txt" />
+    <None Include="Assets\STB\ADAOPS\_Documentation\____CONTACT.txt" />
     <None Include="Assets\info_morgueroom.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
