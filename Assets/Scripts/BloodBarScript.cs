@@ -16,12 +16,10 @@ public class BloodBarScript : MonoBehaviour {
     public static float maxBloodLevel = 1500;
     public static float bloodLossRate = 1;
 
-    //void Awake()
-    //{
-    //    bloodLevel = 0;
-    //    maxBloodLevel = 150;
-    //    bloodLossRate = 1;
-    //}
+    void Awake()
+    {
+        instance = this;
+    }
 
 
 	// Use this for initialization
@@ -43,10 +41,12 @@ public class BloodBarScript : MonoBehaviour {
     void Update () {
 		if(bloodLevel < 1000)
         {
-            bloodParent.SetActive(true);
-            transform.GetChild(0).gameObject.SetActive(true);
-            transform.GetChild(1).gameObject.SetActive(true);
-            transform.GetChild(2).gameObject.SetActive(true);
+            // causes out of bounds
+          //  bloodParent.SetActive(true);
+          //  transform.GetChild(0).gameObject.SetActive(true);
+          //  transform.GetChild(1).gameObject.SetActive(true);
+          //  transform.GetChild(2).gameObject.SetActive(true);
+
         }
 	}
 
@@ -81,13 +81,19 @@ public class BloodBarScript : MonoBehaviour {
         instance.CancelInvoke("TakeBloodLoss");
     }
 
-    private static void TakeBloodLoss()
+    private void TakeBloodLoss()
     {
         if(instance)
         TakeDamage(bloodLossRate);
+        print("Bloodloss of " + bloodLossRate + " taken");
     }
 
     public static void TakeDamage(float damage)
+    {
+        instance.TakeInternalDamage(damage);
+    }
+
+    private void TakeInternalDamage(float damage)
     {
         bloodLevel -= damage;
         if(bloodLevel < 0)
@@ -98,7 +104,7 @@ public class BloodBarScript : MonoBehaviour {
             instance.UpdateBloodBar();
     }
 
-    public static void healBloodLoss(float heal)
+    public void HealBloodLoss(float heal)
     {
         bloodLevel += heal;
         if (bloodLevel > maxBloodLevel)

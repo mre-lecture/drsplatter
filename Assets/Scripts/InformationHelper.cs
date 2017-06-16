@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InformationHelper : MonoBehaviour {
+public class InformationHelper : MonoBehaviour, IInputClickHandler {
 
 	// Use this for initialization
 	void Start () {

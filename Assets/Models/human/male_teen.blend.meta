@@ -63,6 +63,22 @@ ModelImporter:
     100110: toe_R
     100112: upper_arm_L
     100114: upper_arm_R
+    100116: left_arm
+    100118: left_arm_001
+    100120: left_arm_002
+    100122: left_leg
+    100124: left_leg_001
+    100126: left_leg_002
+    100128: left_leg_pipe
+    100130: right_arm
+    100132: right_arm_001
+    100134: right_arm_002
+    100136: right_leg
+    100138: torso
+    100140: torso_001
+    100142: torso_002
+    100144: torso_003
+    100146: torso_004
     400000: chest
     400002: f_index_01_L
     400004: f_index_01_R
@@ -121,7 +137,71 @@ ModelImporter:
     400110: toe_R
     400112: upper_arm_L
     400114: upper_arm_R
+    400116: left_arm
+    400118: left_arm_001
+    400120: left_arm_002
+    400122: left_leg
+    400124: left_leg_001
+    400126: left_leg_002
+    400128: left_leg_pipe
+    400130: right_arm
+    400132: right_arm_001
+    400134: right_arm_002
+    400136: right_leg
+    400138: torso
+    400140: torso_001
+    400142: torso_002
+    400144: torso_003
+    400146: torso_004
+    2300000: left_arm
+    2300002: left_arm_001
+    2300004: left_arm_002
+    2300006: left_leg
+    2300008: left_leg_001
+    2300010: left_leg_002
+    2300012: left_leg_pipe
+    2300014: right_arm
+    2300016: right_arm_001
+    2300018: right_arm_002
+    2300020: right_leg
+    2300022: torso
+    2300024: torso_001
+    2300026: torso_002
+    2300028: torso_003
+    2300030: torso_004
+    3300000: left_arm
+    3300002: left_arm_001
+    3300004: left_arm_002
+    3300006: left_leg
+    3300008: left_leg_001
+    3300010: left_leg_002
+    3300012: left_leg_pipe
+    3300014: right_arm
+    3300016: right_arm_001
+    3300018: right_arm_002
+    3300020: right_leg
+    3300022: torso
+    3300024: torso_001
+    3300026: torso_002
+    3300028: torso_003
+    3300030: torso_004
     4300000: male_teen_lo
+    4300002: left_leg_pipe
+    4300004: left_leg
+    4300006: right_leg
+    4300008: left_arm
+    4300010: right_arm
+    4300012: torso
+    4300014: torso_001
+    4300016: torso_002
+    4300018: torso_003
+    4300020: torso_004
+    4300022: left_arm_002
+    4300024: right_arm_001
+    4300026: left_leg_002
+    4300028: left_leg_001
+    4300030: right_arm_002
+    4300032: left_arm_001
     7400000: Default Take
     7400002: Male_teen_poses
     9500000: //RootNode

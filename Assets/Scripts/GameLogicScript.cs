@@ -32,9 +32,9 @@ public class GameLogicScript : MonoBehaviour {
         gameStage.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 4;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if (gameStarted)
         {
             timer += Time.deltaTime;
@@ -60,6 +60,12 @@ public class GameLogicScript : MonoBehaviour {
             startButton.SetActive(false);
             BloodBarScript.Reset();
             BloodBarScript.StartBloodLoss();
+
+            WoundGeneratorScript.GenerateWound("Torso");
+            WoundGeneratorScript.GenerateWound("Left Arm");
+            WoundGeneratorScript.GenerateWound("Right Arm");
+            WoundGeneratorScript.GenerateWound("Left Leg");
+           // WoundGeneratorScript.GenerateWound("Right Leg");
         }
     }
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TapToPickUp : MonoBehaviour {
+public class TapToPickUp : MonoBehaviour, IInputClickHandler {
 
 	// Use this for initialization
 	void Start () {
@@ -16,16 +16,16 @@ public class TapToPickUp : MonoBehaviour {
         if(GameLogicScript.selectedTool.Equals(" "))
         {
             GameLogicScript.selectedTool = this.gameObject.name;
-            this.gameObject.transform.parent = Camera.main.transform;
+            this.gameObject.transform.position = Camera.main.transform.position;
         }
         else
         {
             GameObject selected = GameObject.Find(GameLogicScript.selectedTool);
             GameObject placer = GameObject.Find(GameLogicScript.selectedTool + " placer");
-            selected.transform.parent = placer.transform;
+            selected.transform.position = placer.transform.position;
 
             GameLogicScript.selectedTool = this.gameObject.name;
-            this.gameObject.transform.parent = Camera.main.transform;
+            this.gameObject.transform.position = Camera.main.transform.position;
         }
         
     }

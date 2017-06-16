@@ -5,11 +5,19 @@ using UnityEngine.UI;
 
 public class DisplayFieldScript : MonoBehaviour {
 
-    public static Text displayText;
-    private static DisplayFieldScript instance;
+    public  Text displayText;
 
-	// Use this for initialization
-	void Start () {
+    public static DisplayFieldScript instance;
+
+    private void Awake()
+    {
+        instance = this;
+        Color white = new Color(1, 1, 1, 1);
+        displayText.color = white;
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -20,13 +28,14 @@ public class DisplayFieldScript : MonoBehaviour {
 
     public static void Display(string message)
     {
-        displayText.text = message;
+        instance.displayText.text = message;
         instance.StartCoroutine(instance.Wait());
-        displayText.text = " ";
+        instance.displayText.text = " ";
+        print(message);
     }
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5f);
     }
 }
