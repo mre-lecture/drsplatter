@@ -393,7 +393,9 @@
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\DisplayFieldScript.cs" />
     <Compile Include="Assets\Scripts\GameLogicScript.cs" />
+    <Compile Include="Assets\Scripts\GrimReaperScript.cs" />
     <Compile Include="Assets\Scripts\InformationHelper.cs" />
+    <Compile Include="Assets\Scripts\ResetButtonGestureHandler.cs" />
     <Compile Include="Assets\Scripts\StartButton_GestureHandler.cs" />
     <Compile Include="Assets\Scripts\TapToPickUp.cs" />
     <Compile Include="Assets\Scripts\TapToPutDown.cs" />

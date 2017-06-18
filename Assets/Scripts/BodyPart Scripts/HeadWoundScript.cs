@@ -41,7 +41,7 @@ public class HeadWoundScript : MonoBehaviour, IInputClickHandler
         // AirTap code goes here
         if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
         {
-            GameLogicScript.numberOfBandages--;
+            GameLogicScript.UseBandage();
             bandaged = true;
 
             //Apply Bandage Model
@@ -52,7 +52,7 @@ public class HeadWoundScript : MonoBehaviour, IInputClickHandler
         }
         else if (GameLogicScript.selectedTool.Equals("desinfectant") && !desinfected)
         {
-            GameLogicScript.numberOfDesinfectants--;
+            GameLogicScript.UseDesinfectant();
             desinfected = true;
 
             // Change Model somehow? or not?

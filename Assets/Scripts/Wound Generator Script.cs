@@ -28,10 +28,12 @@ public class WoundGeneratorScript : MonoBehaviour {
         else if (woundIndex == 1)
         {
             AddLargeCut();
+            GameLogicScript.hasWound = true;
         }
         else if(woundIndex == 2)
         {
             AddSmallCuts();
+            GameLogicScript.hasWound = true;
         }
         /*
          * 

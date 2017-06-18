@@ -16,9 +16,14 @@ public class BloodBarScript : MonoBehaviour {
     public static float maxBloodLevel = 1500;
     public static float bloodLossRate = 1;
 
+    public AudioSource bloodSpillingSound;
+
+    private bool bloodied = false;
+
     void Awake()
     {
         instance = this;
+        bloodParent.SetActive(false);
     }
 
 
@@ -27,26 +32,13 @@ public class BloodBarScript : MonoBehaviour {
         bloodLevel = maxBloodLevel;
 	}
 
-    public static void Reset()
-    {
-        StopBloodLoss();
-        maxBloodLevel = 1500;
-        bloodLevel = maxBloodLevel;
-        bloodLossRate = 1;
-        if(instance)
-            instance.UpdateBloodBar();
-    }
-
     // Update is called once per frame
     void Update () {
-		if(bloodLevel < 1000)
+		if(bloodLevel < 1000 && !bloodied)
         {
-            // causes out of bounds
-          //  bloodParent.SetActive(true);
-          //  transform.GetChild(0).gameObject.SetActive(true);
-          //  transform.GetChild(1).gameObject.SetActive(true);
-          //  transform.GetChild(2).gameObject.SetActive(true);
-
+            bloodParent.SetActive(true);
+            bloodSpillingSound.Play();
+            bloodied = true;
         }
 	}
 
@@ -113,5 +105,17 @@ public class BloodBarScript : MonoBehaviour {
         }
         if(instance)
             instance.UpdateBloodBar();
+    }
+
+    public static void Reset()
+    {
+        StopBloodLoss();
+        maxBloodLevel = 1500;
+        bloodLevel = maxBloodLevel;
+        bloodLossRate = 1;
+        if (instance)
+            instance.UpdateBloodBar();
+        instance.bloodParent.SetActive(false);
+        instance.bloodied = false;
     }
 }

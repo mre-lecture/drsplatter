@@ -29,13 +29,17 @@ public class DisplayFieldScript : MonoBehaviour {
     public static void Display(string message)
     {
         instance.displayText.text = message;
-        instance.StartCoroutine(instance.Wait());
-        instance.displayText.text = " ";
         print(message);
+        instance.WaitAndClear(5f);
     }
 
-    IEnumerator Wait()
+    private void ClearDisplay()
     {
-        yield return new WaitForSeconds(5f);
+        instance.displayText.text = " ";
+    }
+
+    void WaitAndClear(float waitTime)
+    {
+        Invoke("ClearDisplay", waitTime);
     }
 }

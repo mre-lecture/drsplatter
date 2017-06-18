@@ -22,6 +22,13 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
 
     public GameObject blood;
 
+    // Audio Sources
+    public AudioSource scissorsSound;
+    public AudioSource bandageSound;
+    public AudioSource anestheticsSound;
+    public AudioSource desinfectantSound;
+    public AudioSource stitchingSound;
+
     private void Awake()
     {
         instance = this;
@@ -61,75 +68,107 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        // AirTap code goes here
-        if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
+
+        if (GameLogicScript.GetGameState())
         {
-            GameLogicScript.numberOfBandages--;
-            bandaged = true;
+            // AirTap code goes here
+            if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
+            {
+                GameLogicScript.UseBandage();
+                bandaged = true;
 
-            //Apply Bandage Model
-            bandagedBodyPart.SetActive(true);
-            instance.blood.SetActive(false);
+                //Apply Bandage Model
+                bandagedBodyPart.SetActive(true);
+                instance.blood.SetActive(false);
 
-            BloodBarScript.ModifyBloodLossRate(-10);
-            BodyPartBloodLoss -= 10;
-            DisplayFieldScript.Display("Bandages applied");
+                BloodBarScript.ModifyBloodLossRate(-10);
+                BodyPartBloodLoss -= 10;
+
+                bandageSound.Play();
+
+                DisplayFieldScript.Display("Bandages applied");
+            }
+            else if (GameLogicScript.selectedTool.Equals("desinfectant") && !desinfected)
+            {
+                GameLogicScript.UseDesinfectant();
+                desinfected = true;
+
+                // Change Model somehow? or not?
+
+                BloodBarScript.ModifyBloodLossRate(-5);
+                BodyPartBloodLoss -= 5;
+                BloodBarScript.TakeDamage(20);
+
+                desinfectantSound.Play();
+
+                DisplayFieldScript.Display("Desinfectant applied");
+            }
+            else if (GameLogicScript.selectedTool.Equals("scissors") && bandaged)
+            {
+                bandaged = false;
+                BloodBarScript.ModifyBloodLossRate(10);
+                BodyPartBloodLoss += 10;
+
+                scissorsSound.Play();
+
+                // Remove Bandage Model
+                bandagedBodyPart.SetActive(false);
+                instance.blood.SetActive(true);
+
+                DisplayFieldScript.Display("Bandages removed");
+            }
+            else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
+            {
+                BloodBarScript.ModifyBloodLossRate(-2);
+                BodyPartBloodLoss -= 2;
+                BloodBarScript.TakeDamage(10);
+                anesthetized = true;
+
+                anestheticsSound.Play();
+
+                DisplayFieldScript.Display("Anesthetics applied");
+            }
+            else if (GameLogicScript.selectedTool.Equals("bonesaw"))
+            {
+                BloodBarScript.TakeDamage(50);
+                DisplayFieldScript.Display("Oh Really?");
+            }
+            else if (GameLogicScript.selectedTool.Equals("needle") && !stitched && !bandaged)
+            {
+                BloodBarScript.TakeDamage(5);
+                BloodBarScript.ModifyBloodLossRate(-20);
+                BodyPartBloodLoss -= 20;
+                stitched = true;
+
+                stitchingSound.Play();
+
+                DisplayFieldScript.Display("Wound stitched");
+
+                instance.woundedBodyPart.SetActive(false);
+                instance.stitchedBodyPart.SetActive(true);
+                instance.blood.SetActive(false);
+
+            }
         }
-        else if (GameLogicScript.selectedTool.Equals("desinfectant") && !desinfected)
-        {
-            GameLogicScript.numberOfDesinfectants--;
-            desinfected = true;
-
-            // Change Model somehow? or not?
-
-            BloodBarScript.ModifyBloodLossRate(-5);
-            BodyPartBloodLoss -= 5;
-            BloodBarScript.TakeDamage(20);
-            DisplayFieldScript.Display("Desinfectant applied");
-        }
-        else if (GameLogicScript.selectedTool.Equals("scissors") && bandaged)
-        {
-            bandaged = false;
-            BloodBarScript.ModifyBloodLossRate(10);
-            BodyPartBloodLoss += 10;
-
-            // Remove Bandage Model
-            bandagedBodyPart.SetActive(false);
-            instance.blood.SetActive(true);
-
-            DisplayFieldScript.Display("Bandages removed");
-        }
-        else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
-        {
-            BloodBarScript.ModifyBloodLossRate(-2);
-            BodyPartBloodLoss -= 2;
-            BloodBarScript.TakeDamage(10);
-            anesthetized = true;
-            DisplayFieldScript.Display("Anesthetics applied");
-        }
-        else if (GameLogicScript.selectedTool.Equals("bonesaw"))
-        {
-            BloodBarScript.TakeDamage(50);
-            DisplayFieldScript.Display("Oh Really?");
-        }
-        else if (GameLogicScript.selectedTool.Equals("needle") && !stitched && !bandaged)
-        {
-            BloodBarScript.TakeDamage(5);
-            BloodBarScript.ModifyBloodLossRate(-20);
-            BodyPartBloodLoss -= 20;
-            stitched = true;
-            DisplayFieldScript.Display("Wound stitched");
-
-            instance.woundedBodyPart.SetActive(false);
-            instance.stitchedBodyPart.SetActive(true);
-            instance.blood.SetActive(false);
-
-        }
-
     }
 
     public void OnInputDown(InputEventData eventData)
     { }
     public void OnInputUp(InputEventData eventData)
     { }
+
+    public static void ResetBodyPart()
+    {
+        BodyPartBloodLoss = 0;
+        woundType = " ";
+        instance.bandaged = false;
+        instance.desinfected = false;
+        instance.anesthetized = false;
+        instance.stitched = false;
+        instance.healthyBodyPart.SetActive(true);
+        instance.woundedBodyPart.SetActive(false);
+        instance.stitchedBodyPart.SetActive(false);
+        instance.bandagedBodyPart.SetActive(false);
+        instance.blood.SetActive(false);
+    }
 }

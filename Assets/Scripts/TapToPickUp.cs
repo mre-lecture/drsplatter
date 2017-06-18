@@ -12,22 +12,24 @@ public class TapToPickUp : MonoBehaviour, IInputClickHandler {
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        // AirTap code goes here
-        if(GameLogicScript.selectedTool.Equals(" "))
+        if (GameLogicScript.GetGameState())
         {
-            GameLogicScript.selectedTool = this.gameObject.name;
-            this.gameObject.transform.position = Camera.main.transform.position;
-        }
-        else
-        {
-            GameObject selected = GameObject.Find(GameLogicScript.selectedTool);
-            GameObject placer = GameObject.Find(GameLogicScript.selectedTool + " placer");
-            selected.transform.position = placer.transform.position;
+            // AirTap code goes here
+            if (GameLogicScript.selectedTool.Equals(" "))
+            {
+                GameLogicScript.selectedTool = this.gameObject.name;
+                this.gameObject.transform.position = Camera.main.transform.position;
+            }
+            else
+            {
+                GameObject selected = GameObject.Find(GameLogicScript.selectedTool);
+                GameObject placer = GameObject.Find(GameLogicScript.selectedTool + " placer");
+                selected.transform.position = placer.transform.position;
 
-            GameLogicScript.selectedTool = this.gameObject.name;
-            this.gameObject.transform.position = Camera.main.transform.position;
-        }
-        
+                GameLogicScript.selectedTool = this.gameObject.name;
+                this.gameObject.transform.position = Camera.main.transform.position;
+            }
+        }  
     }
 
     public void OnInputDown(InputEventData eventData)
