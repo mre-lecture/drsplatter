@@ -39,11 +39,11 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
         instance = this;
 
         healthyBodyPart.SetActive(true);
+        bandagedBodyPart.SetActive(false);
         /*
         woundedBodyPart.SetActive(false);
         woundedBodyPartWithPipe.SetActive(false);
         stitchedBodyPart.SetActive(false);
-        bandagedBodyPart.SetActive(false);
         blood.SetActive(false);
         */
     }
@@ -90,8 +90,8 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
 
-        if (GameLogicScript.GetGameState())
-        {
+      //  if (GameLogicScript.GetGameState())
+      //  {
             // AirTap code goes here
             if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
             {
@@ -203,7 +203,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
                 scalpelSound.Play();
                 */
 
-            }
+         //   }
         }
     }
 
