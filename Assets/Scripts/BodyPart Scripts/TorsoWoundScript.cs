@@ -80,8 +80,8 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-      //  if (GameLogicScript.GetGameState())
-      //  {
+        if (GameLogicScript.GetGameState())
+        {
             // AirTap code goes here
             if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
             {
@@ -177,7 +177,7 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
                     instance.blood2.SetActive(false);
                 }
 
-         //   }
+            }
         }
     }
 

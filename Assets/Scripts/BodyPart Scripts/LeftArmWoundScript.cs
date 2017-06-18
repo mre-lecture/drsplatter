@@ -72,8 +72,8 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
         if (GameLogicScript.GetGameState())
         {
             // AirTap code goes here
-         //   if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
-         //   {
+            if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
+            {
                 GameLogicScript.UseBandage();
                 bandaged = true;
 
@@ -155,7 +155,7 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
                 instance.woundedBodyPart.SetActive(false);
                 instance.stitchedBodyPart.SetActive(true);
                 instance.blood.SetActive(false);
-         //   }
+            }
         }
     }
 

@@ -84,8 +84,8 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
         if (GameLogicScript.GetGameState())
         {
             // AirTap code goes here
-          //  if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
-          //  {
+            if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
+            {
                 GameLogicScript.UseBandage();
                 bandaged = true;
 
@@ -187,7 +187,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 // hide pipe model
                 instance.woundedBodyPartWithPipe.SetActive(false);
-        //    }
+            }
         }
     }
 

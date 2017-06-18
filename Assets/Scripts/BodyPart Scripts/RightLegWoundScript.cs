@@ -90,8 +90,8 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
 
-      //  if (GameLogicScript.GetGameState())
-      //  {
+        if (GameLogicScript.GetGameState())
+        {
             // AirTap code goes here
             if (GameLogicScript.selectedTool.Equals("bandage") && !bandaged)
             {
@@ -203,7 +203,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
                 scalpelSound.Play();
                 */
 
-         //   }
+            }
         }
     }
 
