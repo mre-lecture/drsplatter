@@ -13,7 +13,7 @@ public class BloodBarScript : MonoBehaviour {
     public static BloodBarScript instance;
 
     public static float bloodLevel = 0;
-    public static float maxBloodLevel = 1500;
+    public static float maxBloodLevel = 2200;
     public static float bloodLossRate = 1;
 
     public AudioSource bloodSpillingSound;

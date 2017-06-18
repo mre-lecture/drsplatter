@@ -81,8 +81,16 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
                 bandagedBodyPart.SetActive(true);
                 instance.blood.SetActive(false);
 
-                BloodBarScript.ModifyBloodLossRate(-10);
-                BodyPartBloodLoss -= 10;
+                if (woundType.Contains("Large"))
+                {
+                    BloodBarScript.ModifyBloodLossRate(-10);
+                    BodyPartBloodLoss -= 10;
+                }
+                else
+                {
+                    BloodBarScript.ModifyBloodLossRate(-5);
+                    BodyPartBloodLoss -= 5;
+                }
 
                 bandageSound.Play();
 
@@ -130,12 +138,12 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("bonesaw"))
             {
-                BloodBarScript.TakeDamage(50);
+                BloodBarScript.TakeDamage(600);
                 DisplayFieldScript.Display("Oh Really?");
             }
             else if (GameLogicScript.selectedTool.Equals("needle") && !stitched && !bandaged)
             {
-                BloodBarScript.TakeDamage(5);
+                BloodBarScript.TakeDamage(15);
                 BloodBarScript.ModifyBloodLossRate(-20);
                 BodyPartBloodLoss -= 20;
                 stitched = true;

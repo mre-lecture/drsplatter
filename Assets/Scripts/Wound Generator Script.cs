@@ -5,6 +5,16 @@ using UnityEngine;
 public class WoundGeneratorScript : MonoBehaviour {
 
     static string bodyPartName;
+    private int largeCut = 25;
+    private int smallCut = 10;
+    private int burns = 15;
+
+    public static WoundGeneratorScript instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start () {
@@ -51,37 +61,37 @@ public class WoundGeneratorScript : MonoBehaviour {
         if (bodyPartName.Contains("Torso")){
             // adds two cuts
             TorsoWoundScript.SetWoundType("LargeCut");
-            TorsoWoundScript.SetBodyPartBloodLoss(20);
-            BloodBarScript.ModifyBloodLossRate(20);
+            TorsoWoundScript.SetBodyPartBloodLoss(instance.largeCut);
+            BloodBarScript.ModifyBloodLossRate(instance.largeCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate+", LargeCut on Torso");
         }
         else if (bodyPartName.Contains("Left Arm"))
         {
             LeftArmWoundScript.SetWoundType("LargeCut");
-            LeftArmWoundScript.SetBodyPartBloodLoss(20);
-            BloodBarScript.ModifyBloodLossRate(20);
+            LeftArmWoundScript.SetBodyPartBloodLoss(instance.largeCut);
+            BloodBarScript.ModifyBloodLossRate(instance.largeCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", LargeCut on Left Arm");
         }
         else if (bodyPartName.Contains("Left Leg"))
         {
             // adds a pipe stuck in the leg
             LeftLegWoundScript.SetWoundType("LargeCut");
-            LeftLegWoundScript.SetBodyPartBloodLoss(20);
-            BloodBarScript.ModifyBloodLossRate(20);
+            LeftLegWoundScript.SetBodyPartBloodLoss(instance.largeCut);
+            BloodBarScript.ModifyBloodLossRate(instance.largeCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Large Cut / Pipe stuck in the Left Leg");
         }
         else if (bodyPartName.Contains("Right Arm"))
         {
             RightArmWoundScript.SetWoundType("LargeCut");
-            RightArmWoundScript.SetBodyPartBloodLoss(20);
-            BloodBarScript.ModifyBloodLossRate(20);
+            RightArmWoundScript.SetBodyPartBloodLoss(instance.largeCut);
+            BloodBarScript.ModifyBloodLossRate(instance.largeCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", LargeCut on Right Arm");
         }
         else if (bodyPartName.Contains("Right Leg"))
         {
             RightLegWoundScript.SetWoundType("LargeCut");
-            RightLegWoundScript.SetBodyPartBloodLoss(20);
-            BloodBarScript.ModifyBloodLossRate(20);
+            RightLegWoundScript.SetBodyPartBloodLoss(instance.largeCut);
+            BloodBarScript.ModifyBloodLossRate(instance.largeCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", LargeCut on Right Leg");
         }
 
@@ -93,36 +103,36 @@ public class WoundGeneratorScript : MonoBehaviour {
         if (bodyPartName.Contains("Torso"))
         {
             TorsoWoundScript.SetWoundType("SmallCuts");
-            TorsoWoundScript.SetBodyPartBloodLoss(10);
-            BloodBarScript.ModifyBloodLossRate(10);
+            TorsoWoundScript.SetBodyPartBloodLoss(instance.smallCut);
+            BloodBarScript.ModifyBloodLossRate(instance.smallCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Small cut on Torso");
         }
         else if (bodyPartName.Contains("Left Arm"))
         {
             LeftArmWoundScript.SetWoundType("SmallCuts");
-            LeftArmWoundScript.SetBodyPartBloodLoss(10);
-            BloodBarScript.ModifyBloodLossRate(10);
+            LeftArmWoundScript.SetBodyPartBloodLoss(instance.smallCut);
+            BloodBarScript.ModifyBloodLossRate(instance.smallCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Small cut on Left Arm");
         }
         else if (bodyPartName.Contains("Left Leg"))
         {
             LeftLegWoundScript.SetWoundType("SmallCuts");
-            LeftLegWoundScript.SetBodyPartBloodLoss(10);
-            BloodBarScript.ModifyBloodLossRate(10);
+            LeftLegWoundScript.SetBodyPartBloodLoss(instance.smallCut);
+            BloodBarScript.ModifyBloodLossRate(instance.smallCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Small cut on Left Leg");
         }
         else if (bodyPartName.Contains("Right Arm"))
         {
             RightArmWoundScript.SetWoundType("SmallCuts");
-            RightArmWoundScript.SetBodyPartBloodLoss(10);
-            BloodBarScript.ModifyBloodLossRate(10);
+            RightArmWoundScript.SetBodyPartBloodLoss(instance.smallCut);
+            BloodBarScript.ModifyBloodLossRate(instance.smallCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Small cut on Right Arm");
         }
         else if (bodyPartName.Contains("Right Leg"))
         {
             RightLegWoundScript.SetWoundType("SmallCuts");
-            RightLegWoundScript.SetBodyPartBloodLoss(10);
-            BloodBarScript.ModifyBloodLossRate(10);
+            RightLegWoundScript.SetBodyPartBloodLoss(instance.smallCut);
+            BloodBarScript.ModifyBloodLossRate(instance.smallCut);
             print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Small cut on Right Leg");
         }
     }
@@ -133,32 +143,32 @@ public class WoundGeneratorScript : MonoBehaviour {
         if (bodyPartName.Contains("Torso"))
         {
             TorsoWoundScript.SetWoundType("Burns");
-            TorsoWoundScript.SetBodyPartBloodLoss(5);
-            BloodBarScript.ModifyBloodLossRate(5);
+            TorsoWoundScript.SetBodyPartBloodLoss(instance.burns);
+            BloodBarScript.ModifyBloodLossRate(instance.burns);
         }
         else if (bodyPartName.Contains("Left Arm"))
         {
             LeftArmWoundScript.SetWoundType("Burns");
-            LeftArmWoundScript.SetBodyPartBloodLoss(5);
-            BloodBarScript.ModifyBloodLossRate(5);
+            LeftArmWoundScript.SetBodyPartBloodLoss(instance.burns);
+            BloodBarScript.ModifyBloodLossRate(instance.burns);
         }
         else if (bodyPartName.Contains("Left Leg"))
         {
             LeftLegWoundScript.SetWoundType("Burns");
-            LeftLegWoundScript.SetBodyPartBloodLoss(5);
-            BloodBarScript.ModifyBloodLossRate(5);
+            LeftLegWoundScript.SetBodyPartBloodLoss(instance.burns);
+            BloodBarScript.ModifyBloodLossRate(instance.burns);
         }
         else if (bodyPartName.Contains("Right Arm"))
         {
             RightArmWoundScript.SetWoundType("Burns");
-            RightArmWoundScript.SetBodyPartBloodLoss(5);
-            BloodBarScript.ModifyBloodLossRate(5);
+            RightArmWoundScript.SetBodyPartBloodLoss(instance.burns);
+            BloodBarScript.ModifyBloodLossRate(instance.burns);
         }
         else if (bodyPartName.Contains("Right Leg"))
         {
             RightLegWoundScript.SetWoundType("Burns");
-            RightLegWoundScript.SetBodyPartBloodLoss(5);
-            BloodBarScript.ModifyBloodLossRate(5);
+            RightLegWoundScript.SetBodyPartBloodLoss(instance.burns);
+            BloodBarScript.ModifyBloodLossRate(instance.burns);
         }
     }
 }

@@ -94,9 +94,17 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
                 instance.blood2.SetActive(false);
 
                 bandageSound.Play();
-
-                BloodBarScript.ModifyBloodLossRate(-10);
-                BodyPartBloodLoss -= 10;
+                if (woundType.Contains("Large"))
+                {
+                    BloodBarScript.ModifyBloodLossRate(-10);
+                    BodyPartBloodLoss -= 10;
+                }
+                else
+                {
+                    BloodBarScript.ModifyBloodLossRate(-5);
+                    BodyPartBloodLoss -= 5;
+                }
+                
                 DisplayFieldScript.Display("Bandages applied");
             }
             else if (GameLogicScript.selectedTool.Equals("desinfectant") && !desinfected)
@@ -140,14 +148,14 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("bonesaw"))
             {
-                BloodBarScript.TakeDamage(50);
+                BloodBarScript.TakeDamage(600);
                 DisplayFieldScript.Display("Oh Really?");
             }
             else if (GameLogicScript.selectedTool.Equals("needle") && stitched < 2 && !bandaged)
             {
                 // Torso can be stitched twice because 2 wounds
 
-                BloodBarScript.TakeDamage(5);
+                BloodBarScript.TakeDamage(15);
                 BloodBarScript.ModifyBloodLossRate(-20);
                 BodyPartBloodLoss -= 20;
                 stitched++;
