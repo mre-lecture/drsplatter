@@ -6,7 +6,7 @@ using UnityEngine;
 public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
 {
 
-    private static int BodyPartBloodLoss;
+    private static float BodyPartBloodLoss;
     private static string woundType;
     private bool bandaged = false;
     private bool desinfected = false;
@@ -47,15 +47,17 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (BodyPartBloodLoss < 2)
+        if (BodyPartBloodLoss < 0)
         {
-            // Change to healthy Model
+            GameLogicScript.CallStopGame();
+            blood.SetActive(false);
+            blood2.SetActive(false);
         }
     }
 
@@ -72,9 +74,12 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
 
     public static void SetBodyPartBloodLoss(int bloodloss)
     {
-        BodyPartBloodLoss = bloodloss * 2; // Torso takes double damage because 2 wounds 
+        if (woundType.Equals("SmallCuts"))
+        {
+            BodyPartBloodLoss = bloodloss * 2;
+        }
+        BodyPartBloodLoss = bloodloss;
     }
-
 
     // ------ AirTap Function ------ //
 
@@ -94,17 +99,34 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
                 instance.blood2.SetActive(false);
 
                 bandageSound.Play();
-                if (woundType.Contains("Large"))
+
+                if (woundType.Length > 0)
                 {
-                    BloodBarScript.ModifyBloodLossRate(-10);
-                    BodyPartBloodLoss -= 10;
+                    if (woundType.Contains("Large"))
+                    {
+                        BodyPartBloodLoss += GameLogicScript.bandageHealLarge;
+                        if (BodyPartBloodLoss < 0)
+                        {
+                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealLarge + BodyPartBloodLoss);
+                        }
+                        else
+                        {
+                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealLarge);
+                        }
+                    }
+                    else
+                    {
+                        BodyPartBloodLoss += GameLogicScript.bandageHealSmall;
+                        if (BodyPartBloodLoss < 0)
+                        {
+                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealSmall + BodyPartBloodLoss);
+                        }
+                        else
+                        {
+                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealSmall);
+                        }
+                    }
                 }
-                else
-                {
-                    BloodBarScript.ModifyBloodLossRate(-5);
-                    BodyPartBloodLoss -= 5;
-                }
-                
                 DisplayFieldScript.Display("Bandages applied");
             }
             else if (GameLogicScript.selectedTool.Equals("desinfectant") && !desinfected)
@@ -112,9 +134,20 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
                 GameLogicScript.UseDesinfectant();
                 desinfected = true;
 
-                BloodBarScript.ModifyBloodLossRate(-5);
-                BodyPartBloodLoss -= 5;
-                BloodBarScript.TakeDamage(20);
+                if (woundType.Length > 0)
+                {
+                    BodyPartBloodLoss += GameLogicScript.desinfectantHeal;
+                    if (BodyPartBloodLoss < 0)
+                    {
+                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.desinfectantHeal + BodyPartBloodLoss);
+                    }
+                    else
+                    {
+                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.desinfectantHeal);
+                    }
+
+                    BloodBarScript.TakeDamage(20);
+                }
 
                 desinfectantSound.Play();
 
@@ -123,13 +156,17 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
             else if (GameLogicScript.selectedTool.Equals("scissors") && bandaged)
             {
                 bandaged = false;
-                BloodBarScript.ModifyBloodLossRate(10);
-                BodyPartBloodLoss += 10;
+
+                if (woundType.Length > 0)
+                {
+                    BloodBarScript.ModifyBloodLossRate(GameLogicScript.scissorsEffect);
+                    BodyPartBloodLoss += GameLogicScript.scissorsEffect;
+                    instance.blood.SetActive(true);
+                    instance.blood2.SetActive(true);
+                }
 
                 // Remove Bandage Model
                 instance.bandagedBodyPart.SetActive(false);
-                instance.blood.SetActive(true);
-                instance.blood2.SetActive(true);
 
                 scissorsSound.Play();
 
@@ -137,10 +174,14 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
             {
-                BloodBarScript.ModifyBloodLossRate(-2);
-                BodyPartBloodLoss -= 2;
-                BloodBarScript.TakeDamage(10);
+                if (woundType.Length > 0)
+                {
+                    BloodBarScript.ModifyBloodLossRate(GameLogicScript.anestheticsHeal);
+                    BodyPartBloodLoss += GameLogicScript.anestheticsHeal;
+
+                }
                 anesthetized = true;
+                BloodBarScript.TakeDamage(10);
 
                 anestheticsSound.Play();
 
@@ -155,28 +196,39 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
             {
                 // Torso can be stitched twice because 2 wounds
 
+                if (woundType.Length > 0)
+                {
+                    BodyPartBloodLoss += GameLogicScript.stitchingHeal / 2;
+                    if (BodyPartBloodLoss < 0)
+                    {
+                        BloodBarScript.ModifyBloodLossRate((GameLogicScript.stitchingHeal / 2) + BodyPartBloodLoss);
+                    }
+                    else
+                    {
+                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.stitchingHeal / 2);
+                    }
+
+                    stitched++;
+
+                    if (stitched == 1)
+                    {
+                        instance.woundedBodyPart.SetActive(false);
+                        instance.stitchedBodyPart1.SetActive(true);
+                        instance.blood.SetActive(false);
+                    }
+                    else if (stitched == 2)
+                    {
+                        instance.stitchedBodyPart1.SetActive(false);
+                        instance.stitchedBodyPart2.SetActive(true);
+                        instance.blood2.SetActive(false);
+                    }
+                }
+
                 BloodBarScript.TakeDamage(15);
-                BloodBarScript.ModifyBloodLossRate(-20);
-                BodyPartBloodLoss -= 20;
-                stitched++;
 
                 stitchingSound.Play();
 
                 DisplayFieldScript.Display("Wound stitched");
-
-                if (stitched == 1)
-                {
-                    instance.woundedBodyPart.SetActive(false);
-                    instance.stitchedBodyPart1.SetActive(true);
-                    instance.blood.SetActive(false);
-                }
-                else if (stitched == 2)
-                {
-                    instance.stitchedBodyPart1.SetActive(false);
-                    instance.stitchedBodyPart2.SetActive(true);
-                    instance.blood2.SetActive(false);
-                }
-
             }
         }
     }

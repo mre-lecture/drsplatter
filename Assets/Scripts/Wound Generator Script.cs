@@ -29,21 +29,22 @@ public class WoundGeneratorScript : MonoBehaviour {
     public static void GenerateWound(string bodyPart)
     {
         bodyPartName = bodyPart;
-        int woundIndex = Random.Range(0, 2);
+        int woundIndex = Random.Range(0, 3);
         if(woundIndex == 0)
         {
             // do nothing
-            print("no wound added on " + bodyPartName);
         }
         else if (woundIndex == 1)
         {
             AddLargeCut();
             GameLogicScript.hasWound = true;
+            GameLogicScript.OverallBloodloss += largeCut;
         }
         else if(woundIndex == 2)
         {
             AddSmallCuts();
             GameLogicScript.hasWound = true;
+            GameLogicScript.OverallBloodloss += smallCut;
         }
         /*
          * 
@@ -103,9 +104,9 @@ public class WoundGeneratorScript : MonoBehaviour {
         if (bodyPartName.Contains("Torso"))
         {
             TorsoWoundScript.SetWoundType("SmallCuts");
-            TorsoWoundScript.SetBodyPartBloodLoss(smallCut);
-            BloodBarScript.ModifyBloodLossRate(smallCut);
-            print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Small cut on Torso");
+            TorsoWoundScript.SetBodyPartBloodLoss(largeCut);
+            BloodBarScript.ModifyBloodLossRate(largeCut);
+            print("Bloddloss=" + BloodBarScript.bloodLossRate + ", Large cut on Torso");
         }
         else if (bodyPartName.Contains("Left Arm"))
         {

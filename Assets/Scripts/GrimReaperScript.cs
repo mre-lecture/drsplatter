@@ -7,6 +7,7 @@ using System;
 public class GrimReaperScript : MonoBehaviour, IInputClickHandler
 {
     public static GrimReaperScript instance;
+    public GameObject reaper;
 
     private void Awake()
     {
@@ -20,14 +21,19 @@ public class GrimReaperScript : MonoBehaviour, IInputClickHandler
 
     public static void SetVisibility(bool visible)
     {
-        if (visible)
+        if (instance)
         {
-            instance.gameObject.SetActive(true);
+            if (visible)
+            {
+                instance.reaper.SetActive(true);
+
+            }
+            else
+            {
+                instance.reaper.SetActive(false);
+            }
         }
-        else
-        {
-            instance.gameObject.SetActive(false);
-        }
+
 
     }
 

@@ -160,22 +160,6 @@
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\Editor\LayerMaskExtensions.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\Editor\ProjectSettingsWindow.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\Editor\SceneSettingsWindow.cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\CreateDecalWindow.cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Basics].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Mesh Decals].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [OtherElements].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Prefabs].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\EditorBasicFunctions\EditorBasicFunctions [Projected Decals].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\GenericMeshDecalEditor.cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\MaterialDefinition.cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\Basics\MergeDecalWindow.cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Basics].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Edition].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Extra].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Mesh Decals].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Prefabs].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow [Projected Decals].cs" />
-    <Compile Include="Assets\STB\ADAOPS\Source\Editor\DecalManagerWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Basic Metal Texture Pack\readme.txt" />

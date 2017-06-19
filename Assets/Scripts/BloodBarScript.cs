@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BloodBarScript : MonoBehaviour {
+public class BloodBarScript : MonoBehaviour
+{
 
     public Image BloodBar;
     public Text ratioText;
@@ -27,20 +28,22 @@ public class BloodBarScript : MonoBehaviour {
     }
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         bloodLevel = maxBloodLevel;
-	}
+    }
 
     // Update is called once per frame
-    void Update () {
-		if(bloodLevel < 1000 && !bloodied)
+    void Update()
+    {
+        if (bloodLevel < 1000 && !bloodied)
         {
             bloodParent.SetActive(true);
             bloodSpillingSound.Play();
             bloodied = true;
         }
-	}
+    }
 
     // Update visual presentation in GameSpace and calculate ratio, to make visualization better
     private void UpdateBloodBar()
@@ -69,15 +72,22 @@ public class BloodBarScript : MonoBehaviour {
 
     public static void StopBloodLoss()
     {
-        if(instance)
-        instance.CancelInvoke("TakeBloodLoss");
+        if (instance)
+            instance.CancelInvoke("TakeBloodLoss");
     }
 
     private void TakeBloodLoss()
     {
-        if(instance)
-        TakeDamage(bloodLossRate);
-        print("Bloodloss of " + bloodLossRate + " taken");
+        if (bloodLossRate > 0)
+        {
+            TakeDamage(bloodLossRate);
+            print("Bloodloss of " + bloodLossRate + " taken");
+        }
+        else
+        {
+            GameLogicScript.CallStopGame();
+        }
+
     }
 
     public static void TakeDamage(float damage)
@@ -88,11 +98,11 @@ public class BloodBarScript : MonoBehaviour {
     private void TakeInternalDamage(float damage)
     {
         bloodLevel -= damage;
-        if(bloodLevel < 0)
+        if (bloodLevel < 0)
         {
             bloodLevel = 0;
         }
-        if(instance)
+        if (instance)
             instance.UpdateBloodBar();
     }
 
@@ -103,7 +113,7 @@ public class BloodBarScript : MonoBehaviour {
         {
             bloodLevel = maxBloodLevel;
         }
-        if(instance)
+        if (instance)
             instance.UpdateBloodBar();
     }
 

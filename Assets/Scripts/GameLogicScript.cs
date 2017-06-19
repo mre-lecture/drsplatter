@@ -24,6 +24,15 @@ public class GameLogicScript : MonoBehaviour
     public GameObject bandagesObject;
     public GameObject desinfectantObject;
     public static bool hasWound;
+    public static float OverallBloodloss;
+
+    public static float bandageHealLarge = -10;
+    public static float bandageHealSmall = -5;
+    public static float stitchingHeal = -20;
+    public static float anestheticsHeal = -2;
+    public static float desinfectantHeal = -5;
+    public static float scissorsEffect = 10;
+
 
     public static GameLogicScript instance;
 
@@ -50,6 +59,9 @@ public class GameLogicScript : MonoBehaviour
 
         GrimReaperScript.SetVisibility(false);
 
+        hasWound = false;
+        OverallBloodloss = 0;
+
         // Place Gamestage in Front of Playercamera - ! Currently NOT Working !
         gameStage.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 4;
     }
@@ -57,7 +69,6 @@ public class GameLogicScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
 
     }
 
@@ -91,19 +102,77 @@ public class GameLogicScript : MonoBehaviour
             desinfectantCount.text = "10";
             numberOfBandages = 10;
             numberOfDesinfectants = 10;
+            hasWound = false;
+            OverallBloodloss = 0;
 
             gameStarted = true;
             startButton.SetActive(false);
             BloodBarScript.Reset();
             BloodBarScript.StartBloodLoss();
 
-            while (!hasWound)
+            bool torsoWounded = false;
+            bool leftArmWounded = false;
+            bool rightArmWounded = false;
+            bool leftLegWounded = false;
+            bool rightLegWounded = false;
+
+            while (OverallBloodloss < 50)
             {
-                WoundGeneratorScript.GenerateWound("Torso");
-                WoundGeneratorScript.GenerateWound("Left Arm");
-                WoundGeneratorScript.GenerateWound("Right Arm");
-                WoundGeneratorScript.GenerateWound("Left Leg");
-                // WoundGeneratorScript.GenerateWound("Right Leg");
+                int bodyPart = Random.Range(0, 5);
+
+                if (OverallBloodloss < 50 && !torsoWounded && bodyPart == 0)
+                {
+                    hasWound = false;
+                    WoundGeneratorScript.GenerateWound("Torso");
+                    if (hasWound)
+                    {
+                        torsoWounded = true;
+                    }
+                }
+                bodyPart = Random.Range(0, 5);
+
+                if (OverallBloodloss < 50 && !leftArmWounded && bodyPart == 1)
+                {
+                    hasWound = false;
+                    WoundGeneratorScript.GenerateWound("Left Arm");
+                    if (hasWound)
+                    {
+                        leftArmWounded = true;
+                    }
+                }
+                bodyPart = Random.Range(0, 5);
+
+                if (OverallBloodloss < 50 && !rightArmWounded && bodyPart == 2)
+                {
+                    hasWound = false;
+                    WoundGeneratorScript.GenerateWound("Right Arm");
+                    if (hasWound)
+                    {
+                        rightArmWounded = true;
+                    }
+                }
+                bodyPart = Random.Range(0, 5);
+
+                if (OverallBloodloss < 50 && !leftLegWounded && bodyPart == 3)
+                {
+                    hasWound = false;
+                    WoundGeneratorScript.GenerateWound("Left Leg");
+                    if (hasWound)
+                    {
+                        leftLegWounded = true;
+                    }
+                }
+                bodyPart = Random.Range(0, 5);
+
+                if (OverallBloodloss < 50 && !rightLegWounded && bodyPart == 4)
+                {
+                    hasWound = false;
+                    WoundGeneratorScript.GenerateWound("Right Leg");
+                    if (hasWound)
+                    {
+                        rightLegWounded = true;
+                    }
+                }
             }
 
             Invoke("HeartMonitor", 1f);
@@ -121,13 +190,13 @@ public class GameLogicScript : MonoBehaviour
         if (won)
         {
             uiTimer.text = "Your Time: " + internalTimer.ToString("0.0");
-        
+
             DisplayFieldScript.Display("Patient saved!");
         }
         else
         {
             uiTimer.text = "Patient died!";
-            Invoke("HeartMonitorFlatline",0f);
+            Invoke("HeartMonitorFlatline", 0f);
         }
         Invoke("EnableResetButton", 5f);
         GrimReaperScript.SetVisibility(true);
@@ -158,6 +227,10 @@ public class GameLogicScript : MonoBehaviour
         resetButton.SetActive(false);
         startButton.SetActive(true);
         GrimReaperScript.SetVisibility(false);
+        hasWound = false;
+        OverallBloodloss = 0;
+        numberOfBandages = 10;
+        numberOfDesinfectants = 10;
 
         SceneManager.LoadScene("Main");
     }
@@ -166,7 +239,7 @@ public class GameLogicScript : MonoBehaviour
     {
         numberOfBandages--;
         instance.bandageCount.text = numberOfBandages.ToString();
-        if(numberOfBandages < 1)
+        if (numberOfBandages < 1)
         {
             instance.bandagesObject.SetActive(false);
         }
@@ -176,25 +249,26 @@ public class GameLogicScript : MonoBehaviour
     {
         numberOfDesinfectants--;
         instance.desinfectantCount.text = numberOfDesinfectants.ToString();
-        if(numberOfDesinfectants < 1)
+        if (numberOfDesinfectants < 1)
         {
             instance.desinfectantObject.SetActive(false);
         }
     }
 
-    void HeartMonitor() {
+    void HeartMonitor()
+    {
         float ratio = (BloodBarScript.bloodLevel / BloodBarScript.maxBloodLevel);
 
-        if (ratio < 0.8f)
+        if (ratio < 0.08f)
         {
-            ratio = 0.8f;
+            ratio = 0.08f;
         }
-        
+
         heartBeatMonitorSound.Play();
 
         if (gameStarted)
         {
-                Invoke("HeartMonitor", ratio * 3);
+            Invoke("HeartMonitor", ratio * 3);
         }
     }
 
@@ -220,5 +294,10 @@ public class GameLogicScript : MonoBehaviour
     public static void CallReset()
     {
         instance.ResetGame();
+    }
+
+    public static void CallStopGame()
+    {
+        instance.StopGame(true);
     }
 }
