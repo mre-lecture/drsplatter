@@ -5,9 +5,9 @@ using UnityEngine;
 public class WoundGeneratorScript : MonoBehaviour {
 
     static string bodyPartName;
-    private static int largeCut = 25;
-    private static int smallCut = 10;
-    private static int burns = 15;
+    private static int largeCut;
+    private static int smallCut;
+    private static int burns;
 
     public static WoundGeneratorScript instance;
 
@@ -177,6 +177,40 @@ public class WoundGeneratorScript : MonoBehaviour {
             RightLegWoundScript.SetWoundType("Burns");
             RightLegWoundScript.SetBodyPartBloodLoss(burns);
             BloodBarScript.IncreaseBloodloss(burns);
+        }
+    }
+
+    private static void AddNullData()
+    {
+        if (bodyPartName.Contains("Torso"))
+        {
+            TorsoWoundScript.SetWoundType("");
+            TorsoWoundScript.SetBodyPartBloodLoss(0);
+            BloodBarScript.IncreaseBloodloss(0);
+        }
+        else if (bodyPartName.Contains("Left Arm"))
+        {
+            LeftArmWoundScript.SetWoundType("");
+            LeftArmWoundScript.SetBodyPartBloodLoss(0);
+            BloodBarScript.IncreaseBloodloss(0);
+        }
+        else if (bodyPartName.Contains("Left Leg"))
+        {
+            LeftLegWoundScript.SetWoundType("");
+            LeftLegWoundScript.SetBodyPartBloodLoss(0);
+            BloodBarScript.IncreaseBloodloss(0);
+        }
+        else if (bodyPartName.Contains("Right Arm"))
+        {
+            RightArmWoundScript.SetWoundType("");
+            RightArmWoundScript.SetBodyPartBloodLoss(0);
+            BloodBarScript.IncreaseBloodloss(0);
+        }
+        else if (bodyPartName.Contains("Right Leg"))
+        {
+            RightLegWoundScript.SetWoundType("");
+            RightLegWoundScript.SetBodyPartBloodLoss(0);
+            BloodBarScript.IncreaseBloodloss(0);
         }
     }
 }

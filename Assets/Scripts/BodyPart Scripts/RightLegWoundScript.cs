@@ -100,7 +100,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 //Apply Bandage Model
                 bandagedBodyPart.SetActive(true);
-                if(woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
 
                     instance.blood1.SetActive(false);
@@ -144,7 +144,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
                 GameLogicScript.UseDesinfectant();
                 desinfected = true;
 
-                if(woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BodyPartBloodLoss += GameLogicScript.desinfectantHeal;
                     if (BodyPartBloodLoss < GameLogicScript.desinfectantHeal)
@@ -167,7 +167,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
             {
                 bandaged = false;
 
-                if(woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
                     BodyPartBloodLoss += GameLogicScript.scissorsEffect;
@@ -187,7 +187,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
             {
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.anestheticsHeal)
                     {
@@ -223,7 +223,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
             {
                 BloodBarScript.TakeDamage(15);
 
-                if(woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < (GameLogicScript.stitchingHeal/3))
                     {

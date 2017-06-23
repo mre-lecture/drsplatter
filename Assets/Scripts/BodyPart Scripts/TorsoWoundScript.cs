@@ -94,8 +94,8 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
                 instance.blood2.SetActive(false);
 
                 bandageSound.Play();
-
-                if (woundType.Length > 0)
+             
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (woundType.Contains("Large"))
                     {
@@ -129,7 +129,7 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
                 GameLogicScript.UseDesinfectant();
                 desinfected = true;
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.desinfectantHeal)
                     {
@@ -152,7 +152,7 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
             {
                 bandaged = false;
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
                     BodyPartBloodLoss += GameLogicScript.scissorsEffect;
@@ -169,7 +169,7 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
             {
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.anestheticsHeal)
                     {
@@ -197,7 +197,7 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
             {
                 // Torso can be stitched twice because 2 wounds
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < (GameLogicScript.stitchingHeal/2))
                     {

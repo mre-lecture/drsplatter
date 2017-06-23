@@ -83,7 +83,7 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
                 bandagedBodyPart.SetActive(true);
                 instance.blood.SetActive(false);
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (woundType.Contains("Large"))
                     {
@@ -120,7 +120,7 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
                 GameLogicScript.UseDesinfectant();
                 desinfected = true;
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BodyPartBloodLoss += GameLogicScript.desinfectantHeal;
                     if (BodyPartBloodLoss < GameLogicScript.desinfectantHeal)
@@ -143,7 +143,7 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
             {
                 bandaged = false;
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
                     BodyPartBloodLoss += GameLogicScript.scissorsEffect;
@@ -160,7 +160,7 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
             else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
             {
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.anestheticsHeal)
                     {
@@ -187,7 +187,7 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
             else if (GameLogicScript.selectedTool.Equals("needle") && !stitched && !bandaged)
             {
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.stitchingHeal)
                     {

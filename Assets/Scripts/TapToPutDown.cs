@@ -17,11 +17,18 @@ public class TapToPutDown : MonoBehaviour, IInputClickHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
-        GameObject selected = GameObject.Find(GameLogicScript.selectedTool);
-        GameObject placer = GameObject.Find(GameLogicScript.selectedTool + " placer");
-        selected.transform.position = placer.transform.position;
+        if(GameLogicScript.selectedTool.Equals(" "))
+        {
 
-        GameLogicScript.selectedTool = " ";
+        }
+        else
+        {
+            GameObject selected = GameObject.Find(GameLogicScript.selectedTool);
+            GameObject placer = GameObject.Find(GameLogicScript.selectedTool + " placer");
+            selected.transform.position = placer.transform.position;
+
+            GameLogicScript.selectedTool = " ";
+        }
     }
 
     public void OnInputDown(InputEventData eventData)

@@ -98,7 +98,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
                 //Apply Bandage Model
                 bandagedBodyPart.SetActive(true);
                 instance.blood.SetActive(false);
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (woundType.Contains("Large"))
                     {
@@ -136,7 +136,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
                 desinfected = true;
 
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BodyPartBloodLoss += GameLogicScript.desinfectantHeal;
                     if (BodyPartBloodLoss < GameLogicScript.desinfectantHeal)
@@ -159,7 +159,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
             {
                 bandaged = false;
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
                     BodyPartBloodLoss += GameLogicScript.scissorsEffect;
@@ -175,7 +175,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
             {
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss< GameLogicScript.anestheticsHeal)
                     {
@@ -208,23 +208,20 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
             else if (GameLogicScript.selectedTool.Equals("bonesaw") && !pipeRemoved)
             {
                 BloodBarScript.TakeDamage(15);
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
-                    if (woundType.Length > 0)
-                    {
                         BloodBarScript.ModifyBloodLossRate(+10);
                         pipeRemoved = true;
                         // hide pipe model
                         instance.woundedBodyPartWithPipe.SetActive(false);
                     }
-                }
                 bonesawSound.Play();
             }
             else if (GameLogicScript.selectedTool.Equals("needle") && !stitched && pipeRemoved && !bandaged)
             {
                 BloodBarScript.TakeDamage(15);
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.stitchingHeal)
                     {
@@ -253,7 +250,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
             {
                 BloodBarScript.TakeDamage(20);
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BloodBarScript.IncreaseBloodloss(10);
                     pipeRemoved = true;
@@ -269,7 +266,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
             {
                 BloodBarScript.TakeDamage(15);
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.stitchingHeal)
                     {

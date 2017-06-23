@@ -83,7 +83,7 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
                 bandagedBodyPart.SetActive(true);
                 instance.blood.SetActive(false);
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (woundType.Contains("Large"))
                     {
@@ -120,7 +120,7 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
                 GameLogicScript.UseDesinfectant();
                 desinfected = true;
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.desinfectantHeal)
                     {
@@ -142,7 +142,7 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
             {
                 bandaged = false;
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
                     BodyPartBloodLoss += GameLogicScript.scissorsEffect;
@@ -158,7 +158,7 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
             {
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.anestheticsHeal)
                     {
@@ -186,7 +186,7 @@ public class LeftArmWoundScript : MonoBehaviour, IInputClickHandler
             {
                 BloodBarScript.TakeDamage(15);
 
-                if (woundType.Length > 0)
+                if (woundType != null && woundType.Length > 0)
                 {
                     if (BodyPartBloodLoss < GameLogicScript.stitchingHeal)
                     {

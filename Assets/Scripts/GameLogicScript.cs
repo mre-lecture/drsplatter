@@ -27,14 +27,18 @@ public class GameLogicScript : MonoBehaviour
     public static bool hasWound;
     public static float OverallBloodloss;
 
-    public static int bandageHealLarge = 10;
-    public static int bandageHealSmall = 5;
-    public static int stitchingHeal = 20;
-    public static int anestheticsHeal = 2;
-    public static int desinfectantHeal = 5;
-    public static int scissorsEffect = 10;
+    public static int bandageHealLarge;
+    public static int bandageHealSmall;
+    public static int stitchingHeal;
+    public static int anestheticsHeal;
+    public static int desinfectantHeal;
+    public static int scissorsEffect;
 
     public static GameLogicScript instance;
+
+    private bool presentationModeEnabled = true;
+    private int bloodLossLimit;
+    private int endGameBloodloss;
 
     public AudioSource heartBeatMonitorSound;
     public AudioSource heartBeatMonitorFlatlineSound;
@@ -102,6 +106,35 @@ public class GameLogicScript : MonoBehaviour
     {
         if (gameStarted == false)
         {
+            if (presentationModeEnabled)
+            {
+                bandageHealLarge = 3;
+                bandageHealSmall = 2;
+                stitchingHeal = 6;
+                anestheticsHeal = 1;
+                desinfectantHeal = 2;
+                scissorsEffect = 5;
+
+                bloodLossLimit = 16;
+
+                WoundGeneratorScript.SetWoundValues(8, 3, 5);
+            }
+            else
+            {
+                bandageHealLarge = 10;
+                bandageHealSmall = 5;
+                stitchingHeal = 20;
+                anestheticsHeal = 2;
+                desinfectantHeal = 5;
+                scissorsEffect = 10;
+
+                bloodLossLimit = 50;
+
+                WoundGeneratorScript.SetWoundValues(25, 10, 15);
+            }
+
+            print("Current Values: " + bandageHealLarge + " , " + bandageHealSmall + " , " + stitchingHeal + " , " + anestheticsHeal + " , " + desinfectantHeal + " , " + scissorsEffect);
+
             counterBackground.SetActive(true);
             textBackground.SetActive(true);
             timerBackground.SetActive(true);
@@ -123,11 +156,11 @@ public class GameLogicScript : MonoBehaviour
             bool leftLegWounded = false;
             bool rightLegWounded = false;
 
-            while (OverallBloodloss < 50)
+            while (OverallBloodloss < bloodLossLimit)
             {
                 int bodyPart = Random.Range(0, 5);
 
-                if (OverallBloodloss < 50 && !torsoWounded && bodyPart == 0)
+                if (OverallBloodloss < bloodLossLimit && !torsoWounded && bodyPart == 0)
                 {
                     hasWound = false;
                     WoundGeneratorScript.GenerateWound("Torso");
@@ -138,7 +171,7 @@ public class GameLogicScript : MonoBehaviour
                 }
                 bodyPart = Random.Range(0, 5);
 
-                if (OverallBloodloss < 50 && !leftArmWounded && bodyPart == 1)
+                if (OverallBloodloss < bloodLossLimit && !leftArmWounded && bodyPart == 1)
                 {
                     hasWound = false;
                     WoundGeneratorScript.GenerateWound("Left Arm");
@@ -149,7 +182,7 @@ public class GameLogicScript : MonoBehaviour
                 }
                 bodyPart = Random.Range(0, 5);
 
-                if (OverallBloodloss < 50 && !rightArmWounded && bodyPart == 2)
+                if (OverallBloodloss < bloodLossLimit && !rightArmWounded && bodyPart == 2)
                 {
                     hasWound = false;
                     WoundGeneratorScript.GenerateWound("Right Arm");
@@ -160,7 +193,7 @@ public class GameLogicScript : MonoBehaviour
                 }
                 bodyPart = Random.Range(0, 5);
 
-                if (OverallBloodloss < 50 && !leftLegWounded && bodyPart == 3)
+                if (OverallBloodloss < bloodLossLimit && !leftLegWounded && bodyPart == 3)
                 {
                     hasWound = false;
                     WoundGeneratorScript.GenerateWound("Left Leg");
@@ -171,7 +204,7 @@ public class GameLogicScript : MonoBehaviour
                 }
                 bodyPart = Random.Range(0, 5);
 
-                if (OverallBloodloss < 50 && !rightLegWounded && bodyPart == 4)
+                if (OverallBloodloss < bloodLossLimit && !rightLegWounded && bodyPart == 4)
                 {
                     hasWound = false;
                     WoundGeneratorScript.GenerateWound("Right Leg");
@@ -316,16 +349,10 @@ public class GameLogicScript : MonoBehaviour
         instance.StopGame(true);
     }
 
+    // Easy Difficutly / Presentatio Mode Difficutly
     public void SetPresentationMode()
     {
-        bandageHealLarge = 5;
-        bandageHealSmall = 2;
-        stitchingHeal = 8;
-        anestheticsHeal = 1;
-        desinfectantHeal = 2;
-        scissorsEffect = 5;
-
-        WoundGeneratorScript.SetWoundValues(10, 5, 7);
+        presentationModeEnabled = true;
 
         DisplayFieldScript.Display("Presentation Mode Activated");
         CallTextToSpeechOutput("Presentation Mode Activated");
@@ -334,14 +361,7 @@ public class GameLogicScript : MonoBehaviour
     // Normal Difficulty
     public void SetNormalMode()
     {
-        bandageHealLarge = 10;
-        bandageHealSmall = 5;
-        stitchingHeal = 20;
-        anestheticsHeal = 2;
-        desinfectantHeal = 5;
-        scissorsEffect = 10;
-
-        WoundGeneratorScript.SetWoundValues(25, 10, 15);
+        presentationModeEnabled = false;
 
         DisplayFieldScript.Display("Presentation Mode Deactivated");
         CallTextToSpeechOutput("Presentation Mode Deactivated");
