@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HoloToolkit.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,18 +27,21 @@ public class GameLogicScript : MonoBehaviour
     public static bool hasWound;
     public static float OverallBloodloss;
 
-    public static float bandageHealLarge = -10;
-    public static float bandageHealSmall = -5;
-    public static float stitchingHeal = -20;
-    public static float anestheticsHeal = -2;
-    public static float desinfectantHeal = -5;
-    public static float scissorsEffect = 10;
-
+    public static int bandageHealLarge = 10;
+    public static int bandageHealSmall = 5;
+    public static int stitchingHeal = 20;
+    public static int anestheticsHeal = 2;
+    public static int desinfectantHeal = 5;
+    public static int scissorsEffect = 10;
 
     public static GameLogicScript instance;
 
     public AudioSource heartBeatMonitorSound;
     public AudioSource heartBeatMonitorFlatlineSound;
+
+    public GameObject audioManager;
+    private TextToSpeechManager textToSpeech;
+    private bool ttsEnabled = true;
 
     public static string selectedTool;
 
@@ -69,7 +73,10 @@ public class GameLogicScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        textToSpeech = audioManager.GetComponent<HoloToolkit.Unity.TextToSpeechManager>();
+        textToSpeech.Voice = TextToSpeechVoice.Zira;
 
+        textToSpeech.SpeakText("Welcome to Doctor Splatter!");
     }
 
     // Update is called once per frame
@@ -199,7 +206,12 @@ public class GameLogicScript : MonoBehaviour
             Invoke("HeartMonitorFlatline", 0f);
         }
         Invoke("EnableResetButton", 5f);
-        GrimReaperScript.SetVisibility(true);
+
+        int reaperRandom = Random.Range(0, 10);
+        if (reaperRandom <= 1)
+        {
+            GrimReaperScript.SetVisibility(true);
+        }
     }
 
     void EnableResetButton()
@@ -210,6 +222,7 @@ public class GameLogicScript : MonoBehaviour
 
     public void ResetGame()
     {
+        TapToPutDown.CallPutDown();
         selectedTool = " ";
         internalTimer = 0;
         uiTimer.text = " ";
@@ -232,7 +245,9 @@ public class GameLogicScript : MonoBehaviour
         numberOfBandages = 10;
         numberOfDesinfectants = 10;
 
-        SceneManager.LoadScene("Main");
+
+
+        // SceneManager.LoadScene("Main");
     }
 
     public static void UseBandage()
@@ -299,5 +314,55 @@ public class GameLogicScript : MonoBehaviour
     public static void CallStopGame()
     {
         instance.StopGame(true);
+    }
+
+    public void SetPresentationMode()
+    {
+        bandageHealLarge = 5;
+        bandageHealSmall = 2;
+        stitchingHeal = 8;
+        anestheticsHeal = 1;
+        desinfectantHeal = 2;
+        scissorsEffect = 5;
+
+        WoundGeneratorScript.SetWoundValues(10, 5, 7);
+
+        DisplayFieldScript.Display("Presentation Mode Activated");
+        CallTextToSpeechOutput("Presentation Mode Activated");
+    }
+
+    // Normal Difficulty
+    public void SetNormalMode()
+    {
+        bandageHealLarge = 10;
+        bandageHealSmall = 5;
+        stitchingHeal = 20;
+        anestheticsHeal = 2;
+        desinfectantHeal = 5;
+        scissorsEffect = 10;
+
+        WoundGeneratorScript.SetWoundValues(25, 10, 15);
+
+        DisplayFieldScript.Display("Presentation Mode Deactivated");
+        CallTextToSpeechOutput("Presentation Mode Deactivated");
+    }
+
+    public static void CallTextToSpeechOutput(string message)
+    {
+        instance.textToSpeech.SpeakText(message);
+    }
+
+    public void ToggleTextToSpeech()
+    {
+        if (ttsEnabled)
+        {
+            textToSpeech.SpeakText("Muting Text to Speech");
+            textToSpeech.GetComponent<AudioSource>().mute = true;
+        }
+        else
+        {
+            textToSpeech.GetComponent<AudioSource>().mute = false;
+            textToSpeech.SpeakText("Text to Speech unmuted");
+        }
     }
 }

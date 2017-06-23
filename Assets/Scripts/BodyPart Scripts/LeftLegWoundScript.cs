@@ -6,7 +6,7 @@ using UnityEngine;
 public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
 {
 
-    private static float BodyPartBloodLoss;
+    private static int BodyPartBloodLoss;
     private static string woundType;
     private bool bandaged = false;
     private bool desinfected = false;
@@ -31,6 +31,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
     public AudioSource desinfectantSound;
     public AudioSource stitchingSound;
     public AudioSource scalpelSound;
+    public AudioSource bonesawSound;
 
     private void Awake()
     {
@@ -55,7 +56,6 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
     {
         if (BodyPartBloodLoss < 0)
         {
-            GameLogicScript.CallStopGame();
             blood.SetActive(false);
         }
     }
@@ -98,31 +98,30 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
                 //Apply Bandage Model
                 bandagedBodyPart.SetActive(true);
                 instance.blood.SetActive(false);
-
                 if (woundType.Length > 0)
                 {
                     if (woundType.Contains("Large"))
                     {
-                        BodyPartBloodLoss += GameLogicScript.bandageHealLarge;
-                        if (BodyPartBloodLoss < 0)
+                        if (BodyPartBloodLoss < GameLogicScript.bandageHealLarge)
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealLarge + BodyPartBloodLoss);
+                            BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                         }
                         else
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealLarge);
+                            BloodBarScript.ReduceBloodLoss(GameLogicScript.bandageHealLarge);
+                            BodyPartBloodLoss -= GameLogicScript.bandageHealLarge;
                         }
                     }
                     else
                     {
-                        BodyPartBloodLoss += GameLogicScript.bandageHealSmall;
-                        if (BodyPartBloodLoss < 0)
+                        if (BodyPartBloodLoss < GameLogicScript.bandageHealSmall)
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealSmall + BodyPartBloodLoss);
+                            BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                         }
                         else
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealSmall);
+                            BloodBarScript.ReduceBloodLoss(GameLogicScript.bandageHealSmall);
+                            BodyPartBloodLoss -= GameLogicScript.bandageHealSmall;
                         }
                     }
                 }
@@ -136,16 +135,18 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
                 GameLogicScript.UseDesinfectant();
                 desinfected = true;
 
+
                 if (woundType.Length > 0)
                 {
                     BodyPartBloodLoss += GameLogicScript.desinfectantHeal;
-                    if (BodyPartBloodLoss < 0)
+                    if (BodyPartBloodLoss < GameLogicScript.desinfectantHeal)
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.desinfectantHeal + BodyPartBloodLoss);
+                        BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                     }
                     else
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.desinfectantHeal);
+                        BloodBarScript.ReduceBloodLoss(GameLogicScript.desinfectantHeal);
+                        BodyPartBloodLoss -= GameLogicScript.desinfectantHeal;
                     }
                     BloodBarScript.TakeDamage(20);
                 }
@@ -160,7 +161,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 if (woundType.Length > 0)
                 {
-                    BloodBarScript.ModifyBloodLossRate(GameLogicScript.scissorsEffect);
+                    BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
                     BodyPartBloodLoss += GameLogicScript.scissorsEffect;
                     instance.blood.SetActive(true);
                 }
@@ -176,18 +177,24 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
             {
                 if (woundType.Length > 0)
                 {
-                    BloodBarScript.ModifyBloodLossRate(GameLogicScript.anestheticsHeal);
-                    BodyPartBloodLoss += GameLogicScript.anestheticsHeal;
+                    if (BodyPartBloodLoss< GameLogicScript.anestheticsHeal)
+                    {
+                        BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
+                    }
+                    else
+                    {
+                        BloodBarScript.ReduceBloodLoss(GameLogicScript.anestheticsHeal);
+                        BodyPartBloodLoss -= GameLogicScript.anestheticsHeal;
+                    }
                 }
-
-                BloodBarScript.TakeDamage(10);
                 anesthetized = true;
+                BloodBarScript.TakeDamage(10);
 
                 anestheticsSound.Play();
 
                 DisplayFieldScript.Display("Anesthetics applied");
             }
-            else if (GameLogicScript.selectedTool.Equals("bonesaw"))
+            else if (GameLogicScript.selectedTool.Equals("bonesaw") && pipeRemoved)
             {
                 BloodBarScript.TakeDamage(600);
                 DisplayFieldScript.Display("Oh Really?");
@@ -198,20 +205,35 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
                 instance.woundedBodyPartWithPipe.SetActive(false);
                 instance.stitchedBodyPart.SetActive(false);
             }
+            else if (GameLogicScript.selectedTool.Equals("bonesaw") && !pipeRemoved)
+            {
+                BloodBarScript.TakeDamage(15);
+                if (woundType.Length > 0)
+                {
+                    if (woundType.Length > 0)
+                    {
+                        BloodBarScript.ModifyBloodLossRate(+10);
+                        pipeRemoved = true;
+                        // hide pipe model
+                        instance.woundedBodyPartWithPipe.SetActive(false);
+                    }
+                }
+                bonesawSound.Play();
+            }
             else if (GameLogicScript.selectedTool.Equals("needle") && !stitched && pipeRemoved && !bandaged)
             {
                 BloodBarScript.TakeDamage(15);
 
                 if (woundType.Length > 0)
                 {
-                    BodyPartBloodLoss += GameLogicScript.stitchingHeal;
-                    if (BodyPartBloodLoss < 0)
+                    if (BodyPartBloodLoss < GameLogicScript.stitchingHeal)
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.stitchingHeal + BodyPartBloodLoss);
+                        BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                     }
                     else
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.stitchingHeal);
+                        BloodBarScript.ReduceBloodLoss(GameLogicScript.stitchingHeal);
+                        BodyPartBloodLoss -= GameLogicScript.stitchingHeal;
                     }
 
                     // change model from wounded to stitched and hide blood
@@ -233,7 +255,7 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 if (woundType.Length > 0)
                 {
-                    BloodBarScript.ModifyBloodLossRate(+10);
+                    BloodBarScript.IncreaseBloodloss(10);
                     pipeRemoved = true;
                     // hide pipe model
                     instance.woundedBodyPartWithPipe.SetActive(false);
@@ -243,28 +265,58 @@ public class LeftLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 DisplayFieldScript.Display("Foreign Body removed");
             }
+            else if (woundType.Equals("SmallCuts") && !stitched && !bandaged)
+            {
+                BloodBarScript.TakeDamage(15);
+
+                if (woundType.Length > 0)
+                {
+                    if (BodyPartBloodLoss < GameLogicScript.stitchingHeal)
+                    {
+                        BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
+                    }
+                    else
+                    {
+                        BloodBarScript.ReduceBloodLoss(GameLogicScript.stitchingHeal);
+                        BodyPartBloodLoss -= GameLogicScript.stitchingHeal;
+                    }
+
+                    // change model from wounded to stitched and hide blood
+                    instance.woundedBodyPart.SetActive(false);
+                    instance.stitchedBodyPart.SetActive(true);
+                    instance.blood.SetActive(false);
+                }
+
+                print("BodyPartBloodLoss: " + BodyPartBloodLoss + ", Current Bloodloss: " + BloodBarScript.bloodLossRate + ", Healed amount: " + GameLogicScript.stitchingHeal);
+
+                stitched = true;
+
+                stitchingSound.Play();
+
+                DisplayFieldScript.Display("Wound stitched");
+            }
+            }
+        }
+
+        public void OnInputDown(InputEventData eventData)
+        { }
+        public void OnInputUp(InputEventData eventData)
+        { }
+
+        public static void ResetBodyPart()
+        {
+            BodyPartBloodLoss = 0;
+            woundType = " ";
+            instance.bandaged = false;
+            instance.desinfected = false;
+            instance.anesthetized = false;
+            instance.stitched = false;
+            instance.pipeRemoved = false;
+            instance.healthyBodyPart.SetActive(true);
+            instance.woundedBodyPart.SetActive(false);
+            instance.woundedBodyPartWithPipe.SetActive(false);
+            instance.stitchedBodyPart.SetActive(false);
+            instance.bandagedBodyPart.SetActive(false);
+            instance.blood.SetActive(false);
         }
     }
-
-    public void OnInputDown(InputEventData eventData)
-    { }
-    public void OnInputUp(InputEventData eventData)
-    { }
-
-    public static void ResetBodyPart()
-    {
-        BodyPartBloodLoss = 0;
-        woundType = " ";
-        instance.bandaged = false;
-        instance.desinfected = false;
-        instance.anesthetized = false;
-        instance.stitched = false;
-        instance.pipeRemoved = false;
-        instance.healthyBodyPart.SetActive(true);
-        instance.woundedBodyPart.SetActive(false);
-        instance.woundedBodyPartWithPipe.SetActive(false);
-        instance.stitchedBodyPart.SetActive(false);
-        instance.bandagedBodyPart.SetActive(false);
-        instance.blood.SetActive(false);
-    }
-}

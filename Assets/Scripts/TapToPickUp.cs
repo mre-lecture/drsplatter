@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class TapToPickUp : MonoBehaviour, IInputClickHandler {
 
-	// Use this for initialization
-	void Start () {
+    public static TapToPickUp instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 
@@ -41,4 +48,9 @@ public class TapToPickUp : MonoBehaviour, IInputClickHandler {
     void Update () {
 		
 	}
+
+    public static void ResetTool()
+    {
+       
+    }
 }

@@ -59,9 +59,21 @@ public class BloodBarScript : MonoBehaviour
         bloodLossRate = lossRate;
     }
 
-    public static void ModifyBloodLossRate(float modifier)
+    public static void ModifyBloodLossRate(int modifier)
     {
         bloodLossRate += modifier;
+       // print("ModBloodLoss: modifier = " + modifier);
+       print("Current Bloodloss: " + bloodLossRate);
+    }
+
+    public static void ReduceBloodLoss(int amount)
+    {
+        bloodLossRate -= amount;
+    }
+
+    public static void IncreaseBloodloss(int amount)
+    {
+        bloodLossRate += amount;
     }
 
     public static void StartBloodLoss()
@@ -81,7 +93,7 @@ public class BloodBarScript : MonoBehaviour
         if (bloodLossRate > 0)
         {
             TakeDamage(bloodLossRate);
-            print("Bloodloss of " + bloodLossRate + " taken");
+            //print("Bloodloss of " + bloodLossRate + " taken");
         }
         else
         {
@@ -106,7 +118,7 @@ public class BloodBarScript : MonoBehaviour
             instance.UpdateBloodBar();
     }
 
-    public void HealBloodLoss(float heal)
+    public void HealDamage(float heal)
     {
         bloodLevel += heal;
         if (bloodLevel > maxBloodLevel)

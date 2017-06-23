@@ -6,6 +6,8 @@ using UnityEngine;
 public class TapToPutDown : MonoBehaviour, IInputClickHandler
 {
 
+    public static TapToPutDown instance;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -31,4 +33,14 @@ public class TapToPutDown : MonoBehaviour, IInputClickHandler
     void Update () {
 		
 	}
+
+    public static void CallPutDown()
+    {
+        // AirTap code goes here
+        GameObject selected = GameObject.Find(GameLogicScript.selectedTool);
+        GameObject placer = GameObject.Find(GameLogicScript.selectedTool + " placer");
+        selected.transform.position = placer.transform.position;
+
+        GameLogicScript.selectedTool = " ";
+    }
 }

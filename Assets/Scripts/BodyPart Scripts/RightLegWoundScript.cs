@@ -6,13 +6,12 @@ using UnityEngine;
 public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
 {
 
-    private static float BodyPartBloodLoss;
+    private static int BodyPartBloodLoss;
     private static string woundType;
     private bool bandaged = false;
     private bool desinfected = false;
     private bool anesthetized = false;
     private int stitched = 0;
-    private bool pipeRemoved = false;
 
     public static RightLegWoundScript instance;
 
@@ -63,7 +62,6 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
     {
         if (BodyPartBloodLoss < 0)
         {
-            GameLogicScript.CallStopGame();
             blood1.SetActive(false);
             blood2.SetActive(false);
             blood3.SetActive(false);
@@ -84,7 +82,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
     {
         if (woundType.Equals("SmallCuts"))
         {
-            BodyPartBloodLoss = bloodloss * 2;
+            BodyPartBloodLoss = bloodloss;
         }
         BodyPartBloodLoss = bloodloss;
     }
@@ -112,25 +110,27 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
                     if (woundType.Contains("Large"))
                     {
                         BodyPartBloodLoss += GameLogicScript.bandageHealLarge;
-                        if (BodyPartBloodLoss < 0)
+                        if (BodyPartBloodLoss < GameLogicScript.bandageHealLarge)
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealLarge + BodyPartBloodLoss);
+                            BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                         }
                         else
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealLarge);
+                            BloodBarScript.ReduceBloodLoss(GameLogicScript.bandageHealLarge);
+                            BodyPartBloodLoss -= GameLogicScript.bandageHealLarge;
                         }
                     }
                     else
                     {
                         BodyPartBloodLoss += GameLogicScript.bandageHealSmall;
-                        if (BodyPartBloodLoss < 0)
+                        if (BodyPartBloodLoss < GameLogicScript.bandageHealSmall)
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealSmall + BodyPartBloodLoss);
+                            BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                         }
                         else
                         {
-                            BloodBarScript.ModifyBloodLossRate(GameLogicScript.bandageHealSmall);
+                            BloodBarScript.ReduceBloodLoss(GameLogicScript.bandageHealSmall);
+                            BodyPartBloodLoss -= GameLogicScript.bandageHealSmall;
                         }
                     }
                 }
@@ -147,13 +147,14 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
                 if(woundType.Length > 0)
                 {
                     BodyPartBloodLoss += GameLogicScript.desinfectantHeal;
-                    if (BodyPartBloodLoss < 0)
+                    if (BodyPartBloodLoss < GameLogicScript.desinfectantHeal)
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.desinfectantHeal + BodyPartBloodLoss);
+                        BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                     }
                     else
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.desinfectantHeal);
+                        BloodBarScript.ReduceBloodLoss(GameLogicScript.desinfectantHeal);
+                        BodyPartBloodLoss -= GameLogicScript.desinfectantHeal;
                     }
                     BloodBarScript.TakeDamage(20);
                 }
@@ -168,7 +169,7 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 if(woundType.Length > 0)
                 {
-                    BloodBarScript.ModifyBloodLossRate(GameLogicScript.scissorsEffect);
+                    BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
                     BodyPartBloodLoss += GameLogicScript.scissorsEffect;
 
                     instance.blood1.SetActive(true);
@@ -186,15 +187,20 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
             }
             else if (GameLogicScript.selectedTool.Equals("syringe") && !anesthetized)
             {
-                BloodBarScript.TakeDamage(10);
-                
-                if(woundType.Length > 0)
+                if (woundType.Length > 0)
                 {
-                    BloodBarScript.ModifyBloodLossRate(GameLogicScript.anestheticsHeal);
-                    BodyPartBloodLoss += GameLogicScript.anestheticsHeal;
+                    if (BodyPartBloodLoss < GameLogicScript.anestheticsHeal)
+                    {
+                        BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
+                    }
+                    else
+                    {
+                        BloodBarScript.ReduceBloodLoss(GameLogicScript.anestheticsHeal);
+                        BodyPartBloodLoss -= GameLogicScript.anestheticsHeal;
+                    }
                 }
-
                 anesthetized = true;
+                BloodBarScript.TakeDamage(10);
 
                 anestheticsSound.Play();
 
@@ -219,18 +225,18 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 if(woundType.Length > 0)
                 {
-                    BodyPartBloodLoss += GameLogicScript.stitchingHeal/3;
-                    if(BodyPartBloodLoss < 0)
+                    if (BodyPartBloodLoss < (GameLogicScript.stitchingHeal/3))
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.stitchingHeal / 3 + BodyPartBloodLoss);
-                        print("overheal: " + BodyPartBloodLoss);
+                        BloodBarScript.ReduceBloodLoss(BodyPartBloodLoss);
                     }
                     else
                     {
-                        BloodBarScript.ModifyBloodLossRate(GameLogicScript.stitchingHeal / 3);
+                        BloodBarScript.ReduceBloodLoss((GameLogicScript.stitchingHeal / 3));
+                        BodyPartBloodLoss -= (GameLogicScript.stitchingHeal/3);
                     }
-                    
-                    
+
+                    print("BodyPartBloodLoss: " + BodyPartBloodLoss + ", Current Bloodloss: " + BloodBarScript.bloodLossRate + ", Healed amount: " + (GameLogicScript.stitchingHeal/3));
+
                     stitched++;
 
                     if(stitched == 1)
@@ -276,7 +282,6 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
         instance.desinfected = false;
         instance.anesthetized = false;
         instance.stitched = 0;
-        instance.pipeRemoved = false;
         instance.healthyBodyPart.SetActive(true);
         instance.bandagedBodyPart.SetActive(false);
         instance.woundedBodyPart.SetActive(false);

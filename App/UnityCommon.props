@@ -1,9 +1,0 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <UnityWSASolutionName>Dr. Splatter</UnityWSASolutionName>
-        <UnityWSASolutionDir>D:\HS-Mannheim\IMB\Hauptstudium\7 IMB ( 9 )\MRE\drsplatter\App\</UnityWSASolutionDir>
-        <UnityProjectDir>D:\HS-Mannheim\IMB\Hauptstudium\7 IMB ( 9 )\MRE\drsplatter\</UnityProjectDir>
-        <UnityWSAPlayerDir>D:\Programme\Unity\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>
-        <UnityWSAToolsDir>$(UnityWSASolutionDir)Unity\Tools\</UnityWSAToolsDir>
-    </PropertyGroup>
-</Project>

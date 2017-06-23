@@ -21,8 +21,6 @@ public class GrimReaperScript : MonoBehaviour, IInputClickHandler
 
     public static void SetVisibility(bool visible)
     {
-        if (instance)
-        {
             if (visible)
             {
                 instance.reaper.SetActive(true);
@@ -32,9 +30,6 @@ public class GrimReaperScript : MonoBehaviour, IInputClickHandler
             {
                 instance.reaper.SetActive(false);
             }
-        }
-
-
     }
 
     // Use this for initialization
