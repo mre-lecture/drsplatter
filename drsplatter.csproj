@@ -365,6 +365,7 @@
     <Compile Include="Assets\Scripts\StartButton_GestureHandler.cs" />
     <Compile Include="Assets\Scripts\TapToPickUp.cs" />
     <Compile Include="Assets\Scripts\TapToPlaceModified.cs" />
+    <Compile Include="Assets\Scripts\TapToPlace_using_CenterOfCollider.cs" />
     <Compile Include="Assets\Scripts\TapToPutDown.cs" />
     <Compile Include="Assets\Scripts\ToolInfoScript.cs" />
     <Compile Include="Assets\Scripts\Wound Generator Script.cs" />
