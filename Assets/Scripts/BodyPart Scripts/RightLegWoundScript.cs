@@ -169,12 +169,30 @@ public class RightLegWoundScript : MonoBehaviour, IInputClickHandler
 
                 if (woundType != null && woundType.Length > 0)
                 {
-                    BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
-                    BodyPartBloodLoss += GameLogicScript.scissorsEffect;
+                    if (stitched == 0)
+                    {
+                        BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
+                        BodyPartBloodLoss += GameLogicScript.scissorsEffect;
+                        instance.blood1.SetActive(true);
+                        instance.blood2.SetActive(true);
+                        instance.blood3.SetActive(true);
+                    }
+                    else if (stitched == 1)
+                    {
+                        BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect/2);
+                        BodyPartBloodLoss += GameLogicScript.scissorsEffect / 2;
+                        instance.blood2.SetActive(true);
+                        instance.blood3.SetActive(true);
+                    }
+                    else if (stitched == 2)
+                    {
+                        BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect / 3);
+                        BodyPartBloodLoss += GameLogicScript.scissorsEffect / 3;
+                        instance.blood3.SetActive(true);
+                    }else if(stitched == 3)
+                    {
 
-                    instance.blood1.SetActive(true);
-                    instance.blood2.SetActive(true);
-                    instance.blood3.SetActive(true);
+                    }
 
                 }
 

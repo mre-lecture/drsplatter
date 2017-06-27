@@ -154,10 +154,22 @@ public class TorsoWoundScript : MonoBehaviour, IInputClickHandler
 
                 if (woundType != null && woundType.Length > 0)
                 {
-                    BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
-                    BodyPartBloodLoss += GameLogicScript.scissorsEffect;
-                    instance.blood.SetActive(true);
-                    instance.blood2.SetActive(true);
+                    if (stitched == 0)
+                    {
+                        BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
+                        BodyPartBloodLoss += GameLogicScript.scissorsEffect;
+                        instance.blood.SetActive(true);
+                        instance.blood2.SetActive(true);
+                    }else if(stitched == 1)
+                    {
+                        BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect/2);
+                        BodyPartBloodLoss += GameLogicScript.scissorsEffect/2;
+                        instance.blood2.SetActive(true);
+                    }else if(stitched == 2)
+                    {
+
+                    }
+                    
                 }
 
                 // Remove Bandage Model

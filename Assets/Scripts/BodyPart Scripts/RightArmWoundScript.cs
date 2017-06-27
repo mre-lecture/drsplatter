@@ -145,9 +145,12 @@ public class RightArmWoundScript : MonoBehaviour, IInputClickHandler
 
                 if (woundType != null && woundType.Length > 0)
                 {
-                    BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
-                    BodyPartBloodLoss += GameLogicScript.scissorsEffect;
-                    instance.blood.SetActive(true);
+                    if (!stitched)
+                    {
+                        BloodBarScript.IncreaseBloodloss(GameLogicScript.scissorsEffect);
+                        BodyPartBloodLoss += GameLogicScript.scissorsEffect;
+                        instance.blood.SetActive(true);
+                    }
                 }
 
                 scissorsSound.Play();

@@ -215,6 +215,8 @@ public class GameLogicScript : MonoBehaviour
                 }
             }
 
+            print("Bloodloss added: " + BloodBarScript.bloodLossRate);
+
             Invoke("HeartMonitor", 1f);
             InvokeRepeating("IncrementTimer", 0f, 0.1f);
         }
@@ -240,8 +242,7 @@ public class GameLogicScript : MonoBehaviour
         }
         Invoke("EnableResetButton", 5f);
 
-        int reaperRandom = Random.Range(0, 10);
-        if (reaperRandom <= 1)
+        if (!won)
         {
             GrimReaperScript.SetVisibility(true);
         }
